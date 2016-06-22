@@ -1,5 +1,5 @@
 import javax.swing.*;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -11,7 +11,7 @@ public class MainWindow extends JFrame {
     int state = 0;
     int stateState = 0;
     public MainWindow() {
-        super("JPvZ");
+        super("گیاهان و زامبی ها");
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -22,27 +22,33 @@ public class MainWindow extends JFrame {
             public void mouseMoved(MouseEvent e) {
                 switch (state) {
                     case 0 :
-                        if(249 < e.getX() && e.getX() < 549 && 548 < e.getY() && e.getY() < 579)
-                            stateState = 1;//مقدمه قرمز
-                        else
-                            stateState = 0;
-                    case 1:
-                        if(409 < e.getX() && e.getX() < 730 && 96 < e.getY() && e.getY() < 204)
+                        if(250 < e.getX() && e.getX() < 548 && 547 < e.getY() && e.getY() < 579)
                             stateState = 1;
                         else
                             stateState = 0;
+                        break;
+                    case 1 :
+                        if(407 < e.getX() && e.getX() < 729 && 97 < e.getY() && e.getY() < 203)
+                            stateState = 1;
+                        else
+                            stateState = 0;
+                        break;
                 }
+                //System.out.println(state + "   " + stateState);
             }
 
         });
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(state == 0 && 249 < e.getX() && e.getX() < 549 && 548 < e.getY() && e.getY() < 579) {
-                    state = 1;
-                    stateState = 0;
+                switch (state) {
+                    case 0 :
+                        if(250 < e.getX() && e.getX() < 548 && 547 < e.getY() && e.getY() < 579) {
+                            state = 1;
+                            stateState = 0;
+                        }
                 }
-                System.out.println(e.getX() +"  " + e.getY());
+                //System.out.println(e.getX() + "   " + e.getY());
             }
 
             @Override
@@ -82,22 +88,22 @@ public class MainWindow extends JFrame {
         switch (state) {
             case 0 :
                 if(stateState == 0) {
-                    ImageIcon image = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/intro-1.jpg");
+                    ImageIcon image = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/firstPage.jpg");
                     g.drawImage(image.getImage(),0, 0, null);
                 }
                 else if(stateState == 1){
-                    ImageIcon image1 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/intro-2.jpg");
+                    ImageIcon image1 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/firstPage1.jpg");
                     g.drawImage(image1.getImage(),0, 0, null);
                 }
                 break;
 
             case 1 :
                 if(stateState == 0) {
-                    ImageIcon image2 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/menu-1.jpg");
+                    ImageIcon image2 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/menu.jpg");
                     g.drawImage(image2.getImage(),0, 0, null);
                 }
                 else if(stateState == 1) {
-                    ImageIcon image3 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/menu-2.jpg");
+                    ImageIcon image3 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/menu1.jpg");
                     g.drawImage(image3.getImage(),0, 0, null);
                 }
 
@@ -106,7 +112,6 @@ public class MainWindow extends JFrame {
     }
 
     public static void main(String[] args) {
-        System.out.println("ashkan mehrkar");
         MainWindow intro = new MainWindow();
         intro.setSize(800, 600);
         intro.setVisible(true);

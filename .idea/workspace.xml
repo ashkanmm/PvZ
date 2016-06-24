@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1fffcee-f877-4b11-b136-ec71fb43bd79" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PvZ" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PvZ/MainWindow$1.class" afterPath="$PROJECT_DIR$/out/production/PvZ/MainWindow$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PvZ/MainWindow$2.class" afterPath="$PROJECT_DIR$/out/production/PvZ/MainWindow$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PvZ/MainWindow$3.class" afterPath="$PROJECT_DIR$/out/production/PvZ/MainWindow$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PvZ/MainWindow.class" afterPath="$PROJECT_DIR$/out/production/PvZ/MainWindow.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MainWindow.java" afterPath="$PROJECT_DIR$/src/MainWindow.java" />
     </list>
@@ -26,13 +31,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37262356">
-              <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="121" column="47" selection-start-line="121" selection-start-column="47" selection-end-line="121" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MenuBar.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/MenuBar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.22813688">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <folding>
+                <element signature="e#142#143#0" expanded="true" />
+                <element signature="e#237#238#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -48,7 +66,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="FORCE_PUSH_ALLOWED" value="true" />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode />
+    </option>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -60,7 +83,9 @@
       <list>
         <option value="$PROJECT_DIR$/src/Hello.java" />
         <option value="$PROJECT_DIR$/src/Intro.java" />
+        <option value="$PROJECT_DIR$/src/menuBar.java" />
         <option value="$PROJECT_DIR$/src/MainWindow.java" />
+        <option value="$PROJECT_DIR$/src/MenuBar.java" />
       </list>
     </option>
   </component>
@@ -139,7 +164,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -628,7 +653,7 @@
       <workItem from="1466581572282" duration="916000" />
       <workItem from="1466589035397" duration="12852000" />
       <workItem from="1466616727393" duration="5535000" />
-      <workItem from="1466757503329" duration="2664000" />
+      <workItem from="1466757503329" duration="7586000" />
     </task>
     <task id="LOCAL-00001" summary="Hello class was added.">
       <created>1466498619204</created>
@@ -678,11 +703,17 @@
       <option name="project" value="LOCAL" />
       <updated>1466762692281</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="firstBackGround was created&#10;">
+      <created>1466765699149</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1466765699149</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24544000" />
+    <option name="totallyTimeSpent" value="29466000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="728" extended-state="6" />
@@ -700,6 +731,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.153125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928678" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -711,7 +743,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -731,7 +762,8 @@
     <MESSAGE value="Intro was changed to MainWindow&#10;" />
     <MESSAGE value="Images was updated" />
     <MESSAGE value="Images were updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Images were updated" />
+    <MESSAGE value="firstBackGround was created&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="firstBackGround was created&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -762,10 +794,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37262356">
-          <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="121" column="47" selection-start-line="121" selection-start-column="47" selection-end-line="121" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MenuBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22813688">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="e#142#143#0" expanded="true" />
+            <element signature="e#237#238#0" expanded="true" />
           </folding>
         </state>
       </provider>

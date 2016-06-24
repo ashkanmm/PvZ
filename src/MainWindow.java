@@ -10,6 +10,7 @@ import java.awt.event.MouseMotionListener;
 public class MainWindow extends JFrame {
     int state = 0;
     int stateState = 0;
+    MenuBar menuBar;
     public MainWindow() {
         super("گیاهان در برابر زامبی ها");
         addMouseMotionListener(new MouseMotionListener() {
@@ -53,7 +54,7 @@ public class MainWindow extends JFrame {
                             state  = 2;
                         }
                 }
-                //System.out.println(e.getX() + "   " + e.getY());
+                System.out.println(e.getX() + "   " + e.getY());
             }
 
             @Override
@@ -115,8 +116,11 @@ public class MainWindow extends JFrame {
                 break;
 
             case 2 :
-                ImageIcon image2 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/firstBackGround.jpg");
-                g.drawImage(image2.getImage(),0, 0, null);
+                ImageIcon image2 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/backGround.jpg");
+                g.drawImage(image2.getImage(),0, 10, this);
+                menuBar = new MenuBar();
+                g.drawImage(menuBar.menuBarIcon.getImage(), 10, 20, null);
+
         }
     }
 

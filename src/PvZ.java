@@ -7,11 +7,12 @@ import java.awt.event.MouseMotionListener;
 /**
  * Created by ashkanmehrkar on 6/22/16.
  */
-public class MainWindow extends JFrame {
+public class PvZ extends JFrame {
     int state = 0;
     int stateState = 0;
+    ChamanZan[] chamanZanArray;
     MenuBar menuBar;
-    public MainWindow() {
+    public PvZ() {
         super("گیاهان در برابر زامبی ها");
         addMouseMotionListener(new MouseMotionListener() {
             @Override
@@ -53,6 +54,9 @@ public class MainWindow extends JFrame {
                         if(407 < e.getX() && e.getX() < 729 && 97 < e.getY() && e.getY() < 203) {
                             state  = 2;
                         }
+                    case 2 :
+                        if(720 < e.getX() && e.getX() < 775 && 520 < e.getY() && e.getY() < 540)
+                            setVisible(false);
                 }
                 System.out.println(e.getX() + "   " + e.getY());
             }
@@ -76,11 +80,15 @@ public class MainWindow extends JFrame {
 
             }
         });
+        chamanZanArray = new ChamanZan[5];
+        for(int i= 0; i< 5; i++)
+            chamanZanArray[i] = new ChamanZan(-50, (i+1) * 100 - 25);
+        menuBar = new MenuBar();
         new Thread(){
             @Override
             public void run() {
                 while(true){
-                    MainWindow.this.repaint();
+                    PvZ.this.repaint();
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
@@ -118,14 +126,15 @@ public class MainWindow extends JFrame {
             case 2 :
                 ImageIcon image2 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/backGround.jpg");
                 g.drawImage(image2.getImage(),0, 10, this);
-                menuBar = new MenuBar();
-                g.drawImage(menuBar.menuBarIcon.getImage(), 10, 20, null);
+                menuBar.paint(this.getGraphics());
+                for(int i= 0 ; i< 5; i++)
+                    chamanZanArray[i].paint(this.getGraphics());
 
         }
     }
 
     public static void main(String[] args) {
-        MainWindow intro = new MainWindow();
+        PvZ intro = new PvZ();
         intro.setSize(800, 600);
         intro.setVisible(true);
         intro.setResizable(false);

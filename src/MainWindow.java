@@ -47,6 +47,11 @@ public class MainWindow extends JFrame {
                             state = 1;
                             stateState = 0;
                         }
+
+                    case 1 :
+                        if(407 < e.getX() && e.getX() < 729 && 97 < e.getY() && e.getY() < 203) {
+                            state  = 2;
+                        }
                 }
                 //System.out.println(e.getX() + "   " + e.getY());
             }
@@ -108,6 +113,10 @@ public class MainWindow extends JFrame {
                 }
 
                 break;
+
+            case 2 :
+                ImageIcon image2 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/firstBackGround.jpg");
+                g.drawImage(image2.getImage(),0, 0, null);
         }
     }
 

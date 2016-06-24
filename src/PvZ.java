@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionListener;
  * Created by ashkanmehrkar on 6/22/16.
  */
 public class PvZ extends JFrame {
+    Thread thread;
     int state = 0;
     int stateState = 0;
     ChamanZan[] chamanZanArray;
@@ -84,7 +85,7 @@ public class PvZ extends JFrame {
         for(int i= 0; i< 5; i++)
             chamanZanArray[i] = new ChamanZan(-50, (i+1) * 100 - 25);
         menuBar = new MenuBar();
-        new Thread(){
+        thread = new Thread(){
             @Override
             public void run() {
                 while(true){
@@ -96,7 +97,8 @@ public class PvZ extends JFrame {
                     }
                 }
             }
-        }.start();
+        };
+        thread.start();
     }
     public void paint(Graphics g){
         switch (state) {
@@ -129,7 +131,6 @@ public class PvZ extends JFrame {
                 menuBar.paint(this.getGraphics());
                 for(int i= 0 ; i< 5; i++)
                     chamanZanArray[i].paint(this.getGraphics());
-
         }
     }
 

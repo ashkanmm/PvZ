@@ -15,12 +15,13 @@ public class ChamanZan {
         y= b;
         chamanZanIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/chamanZan.png");
     }
-    public void move() {
+    public void move(final Graphics g) {
         new Thread(){
             @Override
             public void run() {
                 while(x< 800){
                     x= x+ 1;
+                    paint(g);
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {

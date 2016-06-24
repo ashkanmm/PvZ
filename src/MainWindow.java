@@ -11,7 +11,7 @@ public class MainWindow extends JFrame {
     int state = 0;
     int stateState = 0;
     public MainWindow() {
-        super("گیاهان و زامبی ها");
+        super("گیاهان در برابر زامبی ها");
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {

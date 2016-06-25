@@ -2,42 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1fffcee-f877-4b11-b136-ec71fb43bd79" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Images/backGround1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Images/peaShooterIcon.psd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Images/sunflower.psd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Images/sunflowerIcon.psd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/baclGround1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GameState.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plant.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Zombie.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dictionaries/ashkanmehrkar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/backGround.jpg" afterPath="$PROJECT_DIR$/src/Images/backGround.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/chamanZan.png" afterPath="$PROJECT_DIR$/src/Images/chamanZan.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/firstPage.jpg" afterPath="$PROJECT_DIR$/src/Images/firstPage.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/firstPage1.jpg" afterPath="$PROJECT_DIR$/src/Images/firstPage1.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/frame.png" afterPath="$PROJECT_DIR$/src/Images/frame.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/menu.jpg" afterPath="$PROJECT_DIR$/src/Images/menu.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/menu1.jpg" afterPath="$PROJECT_DIR$/src/Images/menu1.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/menuBar.png" afterPath="$PROJECT_DIR$/src/Images/menuBar.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/peaShooter.jpg" afterPath="$PROJECT_DIR$/src/Images/peaShooter.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/peaShooterIcon.jpg" afterPath="$PROJECT_DIR$/src/Images/peaShooterIcon.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sun.png" afterPath="$PROJECT_DIR$/src/Images/sun.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sunflower.jpg" afterPath="$PROJECT_DIR$/src/Images/sunflower.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sunflowerIcon.jpg" afterPath="$PROJECT_DIR$/src/Images/sunflowerIcon.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ChamanZan.java" afterPath="$PROJECT_DIR$/src/ChamanZan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PvZ.java" afterPath="$PROJECT_DIR$/src/PvZ.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sun.java" afterPath="$PROJECT_DIR$/src/Sun.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/menuBar.java" afterPath="$PROJECT_DIR$/src/menuBar.java" />
     </list>
     <ignored path="PvZ.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -767,7 +732,7 @@
       <workItem from="1466616727393" duration="5535000" />
       <workItem from="1466757503329" duration="22032000" />
       <workItem from="1466805720218" duration="63000" />
-      <workItem from="1466845457252" duration="8343000" />
+      <workItem from="1466845457252" duration="8413000" />
     </task>
     <task id="LOCAL-00001" summary="Hello class was added.">
       <created>1466498619204</created>
@@ -847,11 +812,17 @@
       <option name="project" value="LOCAL" />
       <updated>1466845629674</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="ganzodaii">
+      <created>1466861088268</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1466861088268</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52318000" />
+    <option name="totallyTimeSpent" value="52388000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="728" extended-state="6" />
@@ -902,7 +873,8 @@
     <MESSAGE value="Images were updated" />
     <MESSAGE value="firstBackGround was created&#10;" />
     <MESSAGE value="playGround was created&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="playGround was created&#10;" />
+    <MESSAGE value="ganzodaii" />
+    <option name="LAST_COMMIT_MESSAGE" value="ganzodaii" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

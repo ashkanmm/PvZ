@@ -10,20 +10,21 @@ public class Sun {
     public int x;
     public int y;
     public int randomTime;
-    public Sun(final Graphics graphics) {
+    public Sun() {
         sunIcon= new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sun.png");
         final Random random = new Random();
-        x = random.nextInt(765)+ 20;
-        y = random.nextInt(585)+ 105;
+        x = 100;
+        y = 0;
         randomTime= random.nextInt() + 1000;
+        System.out.println(x  +"  " + y);
 
         new Thread(){
             @Override
             public void run() {
                 while(true){
-                    paint(graphics);
+                    y = y + 3;
                     try {
-                        Thread.sleep(random.nextInt());
+                        Thread.sleep(200);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

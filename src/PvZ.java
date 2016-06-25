@@ -27,7 +27,19 @@ public class PvZ extends JFrame {
                         else
                             gameState.setLevel(-3);
                         break;
+                    case -2:
+                        if(250 < e.getX() && e.getX() < 548 && 547 < e.getY() && e.getY() < 579)
+                            gameState.setLevel(-2);
+                        else
+                            gameState.setLevel(-3);
+                        break;
                     case -1:
+                        if(407 < e.getX() && e.getX() < 729 && 97 < e.getY() && e.getY() < 203)
+                            gameState.setLevel(0);
+                        else
+                            gameState.setLevel(-1);
+                        break;
+                    case 0:
                         if(407 < e.getX() && e.getX() < 729 && 97 < e.getY() && e.getY() < 203)
                             gameState.setLevel(0);
                         else
@@ -92,6 +104,7 @@ public class PvZ extends JFrame {
     @Override
     public void paint(Graphics g) {
         gameState.paint(g);
+
     }
 
     /*public void paint(Graphics g) {

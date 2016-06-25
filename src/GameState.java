@@ -11,13 +11,18 @@ public class GameState {
     private MenuBar menuBar;
     private Plant[] plants;
     private Player player;
+    private Sun sun;
 
     public GameState(JFrame jFrame) {
         chamanZanArray = new ChamanZan[5];
+        for(int i = 0; i < 5; i++)
+            chamanZanArray[i] = new ChamanZan(-50, (i+1) * 100 - 25);
         player = new Player();
         plants = new Plant[45];
         zombies = new Zombie[100];
         level = -3;
+        menuBar = new MenuBar();
+        sun = new Sun();
 
     }
 
@@ -44,8 +49,11 @@ public class GameState {
                 ImageIcon image5 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/backGround1.jpg");
                 g.drawImage(image5.getImage(),0, 10, null);
                 menuBar.paint(g);
-                for(int i= 0 ; i< 5; i++)
-                    chamanZanArray[i].paint(g);
+                ImageIcon image6 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chaman1.png");
+                g.drawImage(image6.getImage(), 28, 281, null);
+                chamanZanArray[2].paint(g);
+                sun.paint(g);
+
 
         }
     }

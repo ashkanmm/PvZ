@@ -732,7 +732,7 @@
       <workItem from="1466616727393" duration="5535000" />
       <workItem from="1466757503329" duration="22032000" />
       <workItem from="1466805720218" duration="63000" />
-      <workItem from="1466845457252" duration="8413000" />
+      <workItem from="1466845457252" duration="8449000" />
     </task>
     <task id="LOCAL-00001" summary="Hello class was added.">
       <created>1466498619204</created>
@@ -818,11 +818,17 @@
       <option name="project" value="LOCAL" />
       <updated>1466861088268</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="ganzodaii">
+      <created>1466861145727</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1466861145727</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52388000" />
+    <option name="totallyTimeSpent" value="52424000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="728" extended-state="6" />

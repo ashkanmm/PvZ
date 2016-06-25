@@ -13,7 +13,7 @@ public class ChamanZan {
     public ChamanZan(int a, int b) {
         x= a;
         y= b;
-        chamanZanIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/chamanZan.png");
+        chamanZanIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chamanZan.png");
     }
     public void move(final Graphics g) {
         new Thread(){

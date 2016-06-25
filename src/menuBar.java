@@ -9,9 +9,9 @@ public class MenuBar {
     private ImageIcon peaShooterIcon;
     private ImageIcon sunflowerIcon;
     public MenuBar() {
-        menuBarIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/menuBar.png");
-        peaShooterIcon= new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/peaShooterIcon.jpg");
-        sunflowerIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/sunflowerIcon.jpg");
+        menuBarIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/menuBar.png");
+        peaShooterIcon= new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/peaShooterIcon.jpg");
+        sunflowerIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunflowerIcon.jpg");
     }
     public void paint(Graphics g) {
         g.drawImage(menuBarIcon.getImage(), 10, 20, null);

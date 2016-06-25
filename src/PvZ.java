@@ -8,13 +8,10 @@ import java.awt.event.MouseMotionListener;
  * Created by ashkanmehrkar on 6/22/16.
  */
 public class PvZ extends JFrame {
-    Thread thread;
-    int state = 0;
-    int stateState = 0;
-    ChamanZan[] chamanZanArray;
-    MenuBar menuBar;
+    GameState gameState;
     public PvZ() {
         super("گیاهان در برابر زامبی ها");
+        gameState = new GameState(this);
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -23,18 +20,18 @@ public class PvZ extends JFrame {
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                switch (state) {
-                    case 0 :
+                switch (gameState.getLevel()) {
+                    case -3:
                         if(250 < e.getX() && e.getX() < 548 && 547 < e.getY() && e.getY() < 579)
-                            stateState = 1;
+                            gameState.setLevel(-2);
                         else
-                            stateState = 0;
+                            gameState.setLevel(-3);
                         break;
-                    case 1 :
+                    case -1:
                         if(407 < e.getX() && e.getX() < 729 && 97 < e.getY() && e.getY() < 203)
-                            stateState = 1;
+                            gameState.setLevel(0);
                         else
-                            stateState = 0;
+                            gameState.setLevel(-1);
                         break;
                 }
                 //System.out.println(state + "   " + stateState);
@@ -44,20 +41,15 @@ public class PvZ extends JFrame {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                switch (state) {
-                    case 0 :
-                        if(250 < e.getX() && e.getX() < 548 && 547 < e.getY() && e.getY() < 579) {
-                            state = 1;
-                            stateState = 0;
-                        }
+                switch (gameState.getLevel()) {
+                    case -2 :
+                        if(250 < e.getX() && e.getX() < 548 && 547 < e.getY() && e.getY() < 579)
+                            gameState.setLevel(-1);
 
-                    case 1 :
+                    case 0 :
                         if(407 < e.getX() && e.getX() < 729 && 97 < e.getY() && e.getY() < 203) {
-                            state  = 2;
+                            gameState.setLevel(1);
                         }
-                    case 2 :
-                        if(720 < e.getX() && e.getX() < 775 && 520 < e.getY() && e.getY() < 540)
-                            setVisible(false);
                 }
                 System.out.println(e.getX() + "   " + e.getY());
             }
@@ -81,11 +73,7 @@ public class PvZ extends JFrame {
 
             }
         });
-        chamanZanArray = new ChamanZan[5];
-        for(int i= 0; i< 5; i++)
-            chamanZanArray[i] = new ChamanZan(-50, (i+1) * 100 - 25);
-        menuBar = new MenuBar();
-        thread = new Thread(){
+        Thread thread = new Thread(){
             @Override
             public void run() {
                 while(true){
@@ -100,39 +88,41 @@ public class PvZ extends JFrame {
         };
         thread.start();
     }
-    public void paint(Graphics g){
-        switch (state) {
-            case 0 :
-                if(stateState == 0) {
-                    ImageIcon image = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/firstPage.jpg");
-                    g.drawImage(image.getImage(),0, 0, null);
-                }
-                else if(stateState == 1){
-                    ImageIcon image1 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/firstPage1.jpg");
-                    g.drawImage(image1.getImage(),0, 0, null);
-                }
-                break;
 
-            case 1 :
-                if(stateState == 0) {
-                    ImageIcon image2 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/menu.jpg");
-                    g.drawImage(image2.getImage(),0, 0, null);
-                }
-                else if(stateState == 1) {
-                    ImageIcon image3 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/menu1.jpg");
-                    g.drawImage(image3.getImage(),0, 0, null);
-                }
-
-                break;
-
-            case 2 :
-                ImageIcon image2 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/backGround.jpg");
-                g.drawImage(image2.getImage(),0, 10, this);
-                menuBar.paint(this.getGraphics());
-                for(int i= 0 ; i< 5; i++)
-                    chamanZanArray[i].paint(this.getGraphics());
-        }
+    @Override
+    public void paint(Graphics g) {
+        gameState.paint(g);
     }
+
+    /*public void paint(Graphics g) {
+        switch (gameState.getLevel()) {
+            case -3:
+                ImageIcon image = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/firstPage.jpg");
+                System.err.println(image);
+                g.drawImage(image.getImage(),0, 0, null);
+                break;
+            case -2:
+                ImageIcon image1 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/firstPage1.jpg");
+                g.drawImage(image1.getImage(),0, 0, null);
+                break;
+            case -1:
+                ImageIcon image3 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/menu.jpg");
+                g.drawImage(image3.getImage(),0, 0, null);
+                break;
+            case 0:
+                ImageIcon image4 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/menu1.jpg");
+                g.drawImage(image4.getImage(),0, 0, null);
+                break;
+            case 1:
+                ImageIcon image5 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/backGround1.jpg");
+                g.drawImage(image5.getImage(),0, 10, null);
+                menuBar.paint(g);
+                for(int i= 0 ; i< 5; i++)
+                    chamanZanArray[i].paint(g);
+
+        }
+    }*/
+
 
     public static void main(String[] args) {
         PvZ intro = new PvZ();
@@ -141,5 +131,4 @@ public class PvZ extends JFrame {
         intro.setResizable(false);
         intro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
 }

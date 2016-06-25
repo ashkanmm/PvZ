@@ -11,7 +11,7 @@ public class Sun {
     public int y;
     public int randomTime;
     public Sun(final Graphics graphics) {
-        sunIcon= new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/sun.png");
+        sunIcon= new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sun.png");
         final Random random = new Random();
         x = random.nextInt(765)+ 20;
         y = random.nextInt(585)+ 105;

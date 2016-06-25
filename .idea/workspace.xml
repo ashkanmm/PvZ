@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d1fffcee-f877-4b11-b136-ec71fb43bd79" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
     </list>
     <ignored path="PvZ.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -732,7 +733,7 @@
       <workItem from="1466616727393" duration="5535000" />
       <workItem from="1466757503329" duration="22032000" />
       <workItem from="1466805720218" duration="63000" />
-      <workItem from="1466845457252" duration="8449000" />
+      <workItem from="1466845457252" duration="8497000" />
     </task>
     <task id="LOCAL-00001" summary="Hello class was added.">
       <created>1466498619204</created>
@@ -824,11 +825,17 @@
       <option name="project" value="LOCAL" />
       <updated>1466861145727</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="ganzodaii">
+      <created>1466861181345</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1466861181345</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52424000" />
+    <option name="totallyTimeSpent" value="52472000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="728" extended-state="6" />

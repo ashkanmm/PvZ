@@ -1,5 +1,16 @@
+import javax.swing.*;
+import java.util.ArrayList;
+
 /**
- * Created by ashkanmehrkar on 6/25/16.
+ * Created by ashkanmehrkar on 6/26/16.
  */
-public class Plant {
+public abstract class Plant {
+    protected ImageIcon imageIcon;
+    protected int x;
+    protected int y;
+    protected int row;
+    protected ArrayList<Bullet> bullets;
+    public Plant() {
+
+    }
 }

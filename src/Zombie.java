@@ -1,5 +1,14 @@
+import javax.swing.*;
+
 /**
- * Created by ashkanmehrkar on 6/25/16.
+ * Created by ashkanmehrkar on 6/26/16.
  */
-public class Zombie {
+public abstract class Zombie {
+    protected ImageIcon imageIcon;
+    protected int x;
+    protected int y;
+    protected int row;
+    public Zombie() {
+
+    }
 }

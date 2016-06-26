@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Random;
 
 /**
@@ -9,19 +11,17 @@ public class Sun {
     public ImageIcon sunIcon;
     public int x;
     public int y;
-    public int randomTime;
     public Sun() {
         sunIcon= new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sun.png");
-        final Random random = new Random();
-        x = 100;
+        Random random = new Random();
+        x = random.nextInt(800) + 0;
         y = 0;
-        randomTime= random.nextInt() + 1000;
-        System.out.println(x  +"  " + y);
+        System.out.println(x  +" and " + y);
 
         new Thread(){
             @Override
             public void run() {
-                while(true){
+                while(y < 600){
                     y = y + 3;
                     try {
                         Thread.sleep(200);
@@ -35,4 +35,12 @@ public class Sun {
     public void paint(Graphics g) {
         g.drawImage(sunIcon.getImage(), x, y, null);
     }
+    public boolean getSun(MouseEvent event) {
+        if(x < event.getX() && event.getX() < x + sunIcon.getIconWidth() && y < event.getY() && event.getY() < y + sunIcon.getIconHeight())
+            return true;
+        else
+            return false;
+    }
+
+
 }

@@ -6,24 +6,24 @@ import java.awt.*;
  */
 public class GameState {
     private int level;
-    private ChamanZan[] chamanZanArray;
+    private ChamanZan[] chamanZans;
     private Zombie[] zombies;
     private MenuBar menuBar;
     private Plant[] plants;
     private Player player;
-    private Sun sun;
+    public Sun sun;
+
 
     public GameState(JFrame jFrame) {
-        chamanZanArray = new ChamanZan[5];
+        sun = new Sun();
+        level = -3;
+        menuBar = new MenuBar();
+        chamanZans = new ChamanZan[5];
         for(int i = 0; i < 5; i++)
-            chamanZanArray[i] = new ChamanZan(-50, (i+1) * 100 - 25);
+            chamanZans[i] = new ChamanZan(-50, (i+1) * 100 - 25);
         player = new Player();
         plants = new Plant[45];
         zombies = new Zombie[100];
-        level = -3;
-        menuBar = new MenuBar();
-        sun = new Sun();
-
     }
 
     public void paint(Graphics g) {
@@ -48,12 +48,11 @@ public class GameState {
             case 1:
                 ImageIcon image5 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/backGround1.jpg");
                 g.drawImage(image5.getImage(),0, 10, null);
-                menuBar.paint(g);
                 ImageIcon image6 = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chaman1.png");
-                g.drawImage(image6.getImage(), 28, 281, null);
-                chamanZanArray[2].paint(g);
+                g.drawImage(image6.getImage(), 25, 281, null);
+                menuBar.paint(g);
+                chamanZans[2].paint(g);
                 sun.paint(g);
-
 
         }
     }

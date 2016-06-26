@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by ashkanmehrkar on 6/22/16.
@@ -57,11 +58,16 @@ public class PvZ extends JFrame {
                     case -2 :
                         if(250 < e.getX() && e.getX() < 548 && 547 < e.getY() && e.getY() < 579)
                             gameState.setLevel(-1);
+                        break;
 
                     case 0 :
                         if(407 < e.getX() && e.getX() < 729 && 97 < e.getY() && e.getY() < 203) {
                             gameState.setLevel(1);
                         }
+                        break;
+                    case 1:
+                        if(gameState.sun.getSun(e))
+                            System.out.println("got it");
                 }
                 System.out.println(e.getX() + "   " + e.getY());
             }
@@ -85,10 +91,10 @@ public class PvZ extends JFrame {
 
             }
         });
-        Thread thread = new Thread(){
+        Thread thread = new Thread() {
             @Override
             public void run() {
-                while(true){
+                while(true) {
                     PvZ.this.repaint();
                     try {
                         Thread.sleep(100);
@@ -103,7 +109,10 @@ public class PvZ extends JFrame {
 
     @Override
     public void paint(Graphics g) {
-        gameState.paint(g);
+        BufferedImage buf = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D gg = buf.createGraphics();
+        gameState.paint(gg);
+        g.drawImage(buf, 0, 0, null);
 
     }
 

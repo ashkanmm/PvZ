@@ -5,13 +5,13 @@ import java.awt.*;
  * Created by ashkanmehrkar on 6/24/16.
  */
 public class MenuBar {
-    private ImageIcon menuBarIcon;
-    private ImageIcon peaShooterIcon;
-    private ImageIcon sunflowerIcon;
+    public ImageIcon menuBarIcon;
+    public ImageIcon peaShooterIcon;
+    public ImageIcon sunflowerIcon;
     public MenuBar() {
-        menuBarIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/menuBar.png");
-        peaShooterIcon= new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/peaShooterIcon.jpg");
-        sunflowerIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunflowerIcon.jpg");
+        menuBarIcon = new ImageIcon("/Users/ashkanmehrkar/IntelliJ/jPvZ/src/Images/menuBar.png");
+        peaShooterIcon= new ImageIcon("/Users/ashkanmehrkar/IntelliJ/jPvZ/src/Images/peaShooterIcon.png");
+        sunflowerIcon = new ImageIcon("/Users/ashkanmehrkar/IntelliJ/jPvZ/src/Images/sunflowerIcon.png");
     }
     public void paint(Graphics g) {
         g.drawImage(menuBarIcon.getImage(), 10, 20, null);

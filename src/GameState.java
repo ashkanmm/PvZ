@@ -289,16 +289,18 @@ public class GameState {
                         else
                             draggedImage = null;
                         if(draggedImage != null) {
-                            if(draggedImage.getImage() == peaShooter.getImage()) {
+                            if(draggedImage.getImage() == peaShooter.getImage() && freeSpace(column, row)) {
                                 plants.add(new PeaShooter(column, row));
                                 draggedImage = null;
 								score = score - 100;
                             }
-                            else if(draggedImage.getImage() == sunFlower.getImage()) {
+                            else if(draggedImage.getImage() == sunFlower.getImage() && freeSpace(column, row)) {
                                 plants.add(new SunFlower(column, row));
                                 draggedImage = null;
 								score = score - 50;
                             }
+                            else
+                                draggedImage = null;
                         }
 
                     }
@@ -392,5 +394,12 @@ public class GameState {
 			}
 		}
 	}
+    public boolean freeSpace(int column, int row) {
+        for(Plant plant : plants) {
+            if(plant.row == row && plant.column == column)
+                return false;
+        }
+        return true;
+    }
 }
 

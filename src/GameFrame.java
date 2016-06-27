@@ -121,6 +121,7 @@ public class GameFrame extends JFrame {
                 if(state.draggedImage != null) {
                     g2d.drawImage(state.draggedImage.getImage(), state.tmpX, state.tmpY, null);
                 }
+				g2d.drawString(String.valueOf(state.score), 40, 100);
 		}
 
 	}

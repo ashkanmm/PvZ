@@ -38,6 +38,8 @@ public class GameState {
 		last_Zombie = System.currentTimeMillis();
 	}
 	private int cnt = 0;
+	private long last_sunFlower = 0;
+	private long last_peaShooter = 0;
 	
 	public GameState() {
 		//
@@ -170,6 +172,7 @@ public class GameState {
 							score = score + 25;
 						}
 					}
+					System.out.println(e.getX() + "   " + e.getY());
 					break;
 			}
 
@@ -179,15 +182,17 @@ public class GameState {
 		public void mousePressed(MouseEvent e) {
             switch (condition)  {
                 case 1:
-                    if(92 < e.getX() && e.getX() < 143 && 28 < e.getY() && e.getY() < 100 && score >= 50) {
+                    if(92 < e.getX() && e.getX() < 143 && 28 < e.getY() && e.getY() < 100 && score >= 50 && System.currentTimeMillis() - last_sunFlower > 3000) {
                         draggedImage = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
                         tmpX = e.getX() - draggedImage.getIconWidth()/2;
                         tmpY = e.getY() - draggedImage.getIconHeight();
+						last_sunFlower = System.currentTimeMillis();
                     }
-                    else if(150 < e.getX() && e.getX() < 200 && 30 < e.getY() && e.getY() < 100 && score >=100) {
+                    else if(150 < e.getX() && e.getX() < 200 && 30 < e.getY() && e.getY() < 100 && score >=100 && System.currentTimeMillis() - last_peaShooter > 5000) {
                         draggedImage = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/peaShooter.png");
                         tmpX = e.getX() - draggedImage.getIconWidth()/2;
                         tmpY = e.getY() - draggedImage.getIconHeight();
+						last_peaShooter = System.currentTimeMillis();
                     }
             }
 		}
@@ -230,10 +235,12 @@ public class GameState {
                             if(draggedImage.getImage() == peaShooter.getImage()) {
                                 plants.add(new PeaShooter(column, row));
                                 draggedImage = null;
+								score = score - 100;
                             }
                             else if(draggedImage.getImage() == sunFlower.getImage()) {
                                 plants.add(new SunFlower(column, row));
                                 draggedImage = null;
+								score = score - 50;
                             }
                         }
 

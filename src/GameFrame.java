@@ -1,5 +1,3 @@
-/*** In The Name of Allah ***/
-
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
@@ -13,7 +11,7 @@ import javax.swing.*;
  *    http://docs.oracle.com/javase/tutorial/extra/fullscreen/bufferstrategy.html
  *    http://docs.oracle.com/javase/8/docs/api/java/awt/image/BufferStrategy.html
  * 
- * @author Seyed Mohammad Ghaffarian
+ * @author Ashkan Mehrkar
  */
 public class GameFrame extends JFrame {
 	

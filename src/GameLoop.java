@@ -1,5 +1,3 @@
-/*** In The Name of Allah ***/
-
 /**
  * A very simple structure for the main game loop.
  * THIS IS NOT PERFECT, but works for most situations.
@@ -12,7 +10,7 @@
  * patterns is available in the following link:
  *    http://gameprogrammingpatterns.com/game-loop.html
  * 
- * @author Seyed Mohammad Ghaffarian
+ * @author Ashkan Mehrkar
  */
 public class GameLoop implements Runnable {
 	

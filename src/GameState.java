@@ -1,5 +1,3 @@
-/*** In The Name of Allah ***/
-
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -12,7 +10,7 @@ import java.util.ArrayList;
  * This class holds the state of the game and all of its elements.
  * This class also handles user inputs, which affect the game state.
  * 
- * @author Seyed Mohammad Ghaffarian
+ * @author Ashkan Mehrkar
  */
 public class GameState {
 	int condition;
@@ -29,6 +27,7 @@ public class GameState {
 	public ArrayList<Sun> suns;
 	public ArrayList<Plant> plants;
 	public ArrayList<Zombie> zombies;
+    protected int zombieNumber = 0;
 	private long last_sun = 0;
 	{
 		last_sun = System.currentTimeMillis();
@@ -45,7 +44,7 @@ public class GameState {
 		//
 		// Initialize the game state and all elements ...
 		//
-		score = 50;
+		score = 200;
 		suns = new ArrayList<Sun>();
 		plants = new ArrayList<Plant>();
 		zombies = new ArrayList<Zombie>();
@@ -80,38 +79,96 @@ public class GameState {
 				backGround = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/backGround1.jpg");
 				grass = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chaman1.png");
 				menuBar = new MenuBar();
-				lawnMowers[0] = new LawnMower(3);
-				for(int i = 0; i < suns.size(); i++) {
-					if(suns.get(i).y < 600)
-						suns.get(i).y = suns.get(i).y + 1;
-				}
-				double a = Math.random();
-				if(a > 0.9999 - ((System.currentTimeMillis() - last_sun) / 1000) * 0.0005) {
-					suns.add(new Sun());
-					last_sun = System.currentTimeMillis();
-				}
-				cnt++;
-				for(int i = 0; i < zombies.size(); i++) {
-					if(zombies.get(i).x + zombies.get(i).imageIcon.getIconWidth() > 0 && cnt % 3 == 0)
-						zombies.get(i).x = zombies.get(i).x - 1;
-				}
-				double b = Math.random();
-				if(b > 0.999 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombies.size() < 21) {
-					zombies.add(new NormalZombie(3));
-					last_Zombie = System.currentTimeMillis();
-				}
+                lawnMowers[0] = new LawnMower(3);
+                /**
+                 * here we randomly create new sun.
+                 */
+                double a = Math.random();
+                if(a > 0.9999 - ((System.currentTimeMillis() - last_sun) / 1000) * 0.0005) {
+                    suns.add(new Sun());
+                    last_sun = System.currentTimeMillis();
+                }
+                /**
+                 * this loop, changes the suns' Y.
+                 */
+                for(int i = 0; i < suns.size(); i++) {
+                    if(suns.get(i).y < 600) {
+                        suns.get(i).y = suns.get(i).y + 1;
+                    }
+                }
+                /**
+                 * here we randomly create new zombies and check the limitation of zombie's number for the level.
+                 */
+                double b = Math.random();
+                if(b > 0.999 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber < 9) {
+                    zombies.add(new NormalZombie(3));
+                    last_Zombie = System.currentTimeMillis();
+                    zombieNumber++;
+                }
+                /**
+                 * here we change the position of zombies which we have.
+                 * at the same time we check if any striking is happening and then remove the bullet and decrease the zombie's health.
+                 */
+                cnt++;
                 for(int i = 0; i < zombies.size(); i++) {
-                    for(Plant plant : plants) {
-                        if(plant.getClass().equals(PeaShooter.class) && plant.row == zombies.get(i).row) {
-                            if(System.currentTimeMillis() - plant.last_bullet > 2000 && plant.x < zombies.get(i).x) {
-                                plant.bullets.add(new PeaShooterBullet(plant.x, plant.y));
-                                plant.last_bullet = System.currentTimeMillis();
-                            }
-                            for(Bullet o : plant.bullets) {
-                                o.x = o.x + 3;
+                    if(zombies.get(i).x + zombies.get(i).imageIcon.getIconWidth() > 0 && cnt % 3 == 0) {
+                        zombies.get(i).x = zombies.get(i).x - 2;
+                    }
+                    for(int j = 0; j < plants.size(); j++) {
+                        if(plants.get(j).getClass().equals(PeaShooter.class)) {
+                            for(int k = 0; k < plants.get(j).bullets.size(); k++) {
+                                if(plants.get(j).bullets.get(k).x >= zombies.get(i).x) {
+                                    zombies.get(i).health--;
+                                    plants.get(j).bullets.remove(k);
+                                    if(zombies.get(i).health < 1)
+                                        zombies.remove(i);
+                                }
                             }
                         }
                     }
+
+                }
+                /**
+                 * we update the bullets' position.
+                 * at the same time we check if any striking is happening or not.
+                 */
+                for(Plant plant : plants) {
+                    if(plant.getClass().equals(PeaShooter.class)) {
+                        for(int i = 0; i < plant.bullets.size(); i++) {
+                            if(plant.bullets.get(i).x > 800)
+                                plant.bullets.remove(i);
+                            else
+                                plant.bullets.get(i).x = plant.bullets.get(i).x + 7;
+                            for(int j = 0; j < zombies.size(); j++) {
+                                if(plant.bullets.get(i).x >= zombies.get(j).x) {
+                                    plant.bullets.remove(i);
+                                    zombies.get(j).health--;
+                                    if(zombies.get(j).health < 1)
+                                        zombies.remove(j);
+                                }
+                            }
+                        }
+                    }
+                }
+                /**
+                 * here we check if we have any attacking plants for the row at which the zombies are walking through so plants shoots bullets.
+                 */
+                for(int i = 0; i < zombies.size(); i++) {
+                    for(Plant plant : plants) {
+                        if(plant.getClass().equals(PeaShooter.class) && plant.row == zombies.get(i).row) {
+                            if(System.currentTimeMillis() - plant.last_bullet > 2000 && plant.x < zombies.get(i).x && zombies.get(i).x < 770) {
+                                plant.bullets.add(new PeaShooterBullet(plant.x, plant.y));
+                                plant.last_bullet = System.currentTimeMillis();
+                            }
+                        }
+                    }
+                }
+                /**
+                 * WaVe!!! :D
+                 */
+                if(zombieNumber == 8) {
+                    for(int i = 0; i < 5; i++)
+                        zombies.add(new NormalZombie(3));
                 }
                 break;
 		}

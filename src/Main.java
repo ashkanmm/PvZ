@@ -1,12 +1,10 @@
-/*** In The Name of Allah ***/
-
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 /**
  * Program start.
  * 
- * @author Seyed Mohammad Ghaffarian
+ * @author Ashkan Mehrkar
  */
 public class Main {
 	

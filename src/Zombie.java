@@ -8,6 +8,7 @@ public abstract class Zombie {
     protected int x;
     protected int y;
     protected int row;
+    protected int health;
     public Zombie() {
 
     }

@@ -3,7 +3,6 @@
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
-import java.util.Random;
 import javax.swing.*;
 
 /**
@@ -97,40 +96,31 @@ public class GameFrame extends JFrame {
 			case 1:
 				g2d.drawImage(state.backGround.getImage(), 0, 0, null);
 				g2d.drawImage(state.grass.getImage(),25, 281, null);
-				g2d.drawImage(state.chamanZans[0].chamanZanIcon.getImage(), state.chamanZans[0].x, state.chamanZans[0].y, null);
+				g2d.drawImage(state.lawnMowers[0].imageIcon.getImage(), state.lawnMowers[0].x, state.lawnMowers[0].y, null);
 				g2d.drawImage(state.menuBar.menuBarIcon.getImage(), 10, 20, null);
 				g2d.drawImage(state.menuBar.sunflowerIcon.getImage(), 90, 25, null);
 				g2d.drawImage(state.menuBar.peaShooterIcon.getImage(), 90+ state.menuBar.sunflowerIcon.getIconWidth()+ 5, 25, null);
-				/*for(int i = 0; i < state.suns.size(); i++) {
-					g2d.drawImage(state.suns.get(i).sunIcon.getImage(), state.suns.get(i).x, state.suns.get(i).y, null);
-					if(state.suns.get(i).y < 600)
-						state.suns.get(i).y = state.suns.get(i).y + 1;
-				}
-				double a = Math.random();
-				if(a > 0.9999 - ((System.currentTimeMillis() - last_sun) / 1000) * 0.0005) {
-					state.suns.add(new Sun());
-					last_sun = System.currentTimeMillis();
-				}
-				cnt++;
-				for(int i = 0; i < state.zombies.size(); i++) {
-					g2d.drawImage(state.zombies.get(i).imageIcon.getImage(), state.zombies.get(i).x, state.zombies.get(i).y, null);
-					if(state.zombies.get(i).x + state.zombies.get(i).imageIcon.getIconWidth() > 0 && cnt % 3 == 0)
-						state.zombies.get(i).x = state.zombies.get(i).x - 1;
-				}
-				double b = Math.random();
-				if(b > 0.9999 - ((System.currentTimeMillis() - last_zombie) / 1000) * 0.0005) {
-					state.zombies.add(new NormalZombie());
-					last_zombie = System.currentTimeMillis();
-				}*/
 				for(int i = 0; i < state.suns.size(); i++)
 					g2d.drawImage(state.suns.get(i).sunIcon.getImage(), state.suns.get(i).x, state.suns.get(i).y, null);
 				for(int i = 0; i < state.zombies.size(); i++)
 					g2d.drawImage(state.zombies.get(i).imageIcon.getImage(), state.zombies.get(i).x, state.zombies.get(i).y, null);
-				for(int i = 0; i < state.plants.size(); i++) {
+				/*for(int i = 0; i < state.plants.size(); i++) {
 					g2d.drawImage(state.plants.get(i).imageIcon.getImage(), state.plants.get(i).x, state.plants.get(i).y, null);
 					for(int j = 0; j < state.plants.get(i).bullets.size(); j++)
 					g2d.drawImage(state.plants.get(i).bullets.get(j).imageIcon.getImage(), state.plants.get(i).bullets.get(j).x, state.plants.get(i).bullets.get(j).y, null);
-				}
+				}*/
+                for(Plant plant : state.plants) {
+                    g2d.drawImage(plant.imageIcon.getImage(), plant.x, plant.y, null);
+                    if(plant.getClass().equals(PeaShooter.class)) {
+                        for(int j = 0; j < plant.bullets.size(); j++) {
+                            g2d.drawImage(plant.bullets.get(j).imageIcon.getImage(), plant.bullets.get(j).x, plant.bullets.get(j).y, null);
+                        }
+
+                    }
+                }
+                if(state.draggedImage != null) {
+                    g2d.drawImage(state.draggedImage.getImage(), state.tmpX, state.tmpY, null);
+                }
 		}
 
 	}

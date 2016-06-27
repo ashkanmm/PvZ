@@ -1,18 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * Created by ashkanmehrkar on 6/24/16.
  */
-public class ChamanZan {
-    ImageIcon chamanZanIcon;
+public class LawnMower {
+    ImageIcon imageIcon;
     int x;
     int y;
     private int row;
-    public ChamanZan(int a) {
-        chamanZanIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chamanZan.png");
+    public LawnMower(int a) {
+        imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chamanZan.png");
         switch (a) {
             case 3:
                 x = -50;
@@ -59,7 +57,7 @@ public class ChamanZan {
         }.start();
     }
     public void paint(Graphics g) {
-        g.drawImage(chamanZanIcon.getImage(), x, y, null);
+        g.drawImage(imageIcon.getImage(), x, y, null);
     }
 
 }

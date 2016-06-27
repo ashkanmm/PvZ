@@ -9,7 +9,10 @@ public abstract class Plant {
     protected int x;
     protected int y;
     protected int row;
+    protected int column;
+    public long last_bullet;
     protected ArrayList<Bullet> bullets;
+    protected int price;
     public Plant() {
 
     }

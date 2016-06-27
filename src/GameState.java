@@ -19,8 +19,11 @@ public class GameState {
 	int score;
 	ImageIcon backGround;
 	ImageIcon grass;
+    ImageIcon draggedImage = null;
+    public int tmpX = 0;
+    public int tmpY = 0;
 	MenuBar menuBar;
-	ChamanZan[] chamanZans;
+	LawnMower[] lawnMowers;
 	private KeyHandler keyHandler;
 	private MouseHandler mouseHandler;
 	public ArrayList<Sun> suns;
@@ -34,7 +37,6 @@ public class GameState {
 	{
 		last_Zombie = System.currentTimeMillis();
 	}
-	private long last_bullet = 0;
 	private int cnt = 0;
 	
 	public GameState() {
@@ -43,11 +45,9 @@ public class GameState {
 		//
 		score = 50;
 		suns = new ArrayList<Sun>();
-		//suns.add(new Sun());
 		plants = new ArrayList<Plant>();
-		plants.add(new PeaShooter(3));
 		zombies = new ArrayList<Zombie>();
-		chamanZans = new ChamanZan[5];
+		lawnMowers = new LawnMower[5];
 		condition = -3;
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
@@ -78,7 +78,7 @@ public class GameState {
 				backGround = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/backGround1.jpg");
 				grass = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chaman1.png");
 				menuBar = new MenuBar();
-				chamanZans[0] = new ChamanZan(3);
+				lawnMowers[0] = new LawnMower(3);
 				for(int i = 0; i < suns.size(); i++) {
 					if(suns.get(i).y < 600)
 						suns.get(i).y = suns.get(i).y + 1;
@@ -98,20 +98,20 @@ public class GameState {
 					zombies.add(new NormalZombie(3));
 					last_Zombie = System.currentTimeMillis();
 				}
-				for(int i = 0; i < zombies.size(); i++) {
-					if(zombies.get(i).row ==3) {
-						for(int j = 0; j < plants.size(); j++) {
-							if(plants.get(j).row == 3) {
-								if(System.currentTimeMillis() - last_bullet > 2000) {
-									plants.get(j).bullets.add(new PeaShooterBullet(plants.get(j).x, plants.get(j).y));
-									last_bullet = System.currentTimeMillis();
-								}
-								for (int k = 0; k < plants.get(j).bullets.size(); k++)
-									plants.get(j).bullets.get(k).x = plants.get(j).bullets.get(k).x + 3;
-							}
-						}
-					}
-				}
+                for(int i = 0; i < zombies.size(); i++) {
+                    for(Plant plant : plants) {
+                        if(plant.getClass().equals(PeaShooter.class) && plant.row == zombies.get(i).row) {
+                            if(System.currentTimeMillis() - plant.last_bullet > 2000 && plant.x < zombies.get(i).x) {
+                                plant.bullets.add(new PeaShooterBullet(plant.x, plant.y));
+                                plant.last_bullet = System.currentTimeMillis();
+                            }
+                            for(Bullet o : plant.bullets) {
+                                o.x = o.x + 3;
+                            }
+                        }
+                    }
+                }
+                break;
 		}
 	}
 	
@@ -168,21 +168,115 @@ public class GameState {
 						if(suns.get(i).existence == false) {
 							suns.remove(i);
 							score = score + 25;
-							System.out.println(score);
 						}
 					}
 					break;
 			}
-			System.out.println(e.getX() + "   " + e.getY());
+
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
+            switch (condition)  {
+                case 1:
+                    if(92 < e.getX() && e.getX() < 143 && 28 < e.getY() && e.getY() < 100 && score >= 50) {
+                        draggedImage = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
+                        tmpX = e.getX() - draggedImage.getIconWidth()/2;
+                        tmpY = e.getY() - draggedImage.getIconHeight();
+                    }
+                    else if(150 < e.getX() && e.getX() < 200 && 30 < e.getY() && e.getY() < 100 && score >=100) {
+                        draggedImage = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/peaShooter.png");
+                        tmpX = e.getX() - draggedImage.getIconWidth()/2;
+                        tmpY = e.getY() - draggedImage.getIconHeight();
+                    }
+            }
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-		}
+            int column = 0, row = 0;
+            ImageIcon peaShooter = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/peaShooter.png");
+            ImageIcon sunFlower = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
+            switch (condition) {
+                case 1:
+                    if(draggedImage != null) {
+                        if(274 < e.getY() && e.getY() < 378) {
+                            row = 3;
+                            if(32 < e.getX() && e.getX() < 108)
+                                column = 1;
+                            else if(108 <= e.getX() && e.getX() < 183)
+                                column = 2;
+                            else if(183 <= e.getX() && e.getX() < 265)
+                                column = 3;
+                            else if(265 <= e.getX() && e.getX() < 352)
+                                column = 4;
+                            else if(352 <= e.getX() && e.getX() < 431)
+                                column = 5;
+                            else if(431 <= e.getX() && e.getX() < 517)
+                                column = 6;
+                            else if(517 <= e.getX() && e.getX() < 593)
+                                column = 7;
+                            else if(593 <= e.getX() && e.getX() < 667)
+                                column = 8;
+                            else if(667 <= e.getX() && e.getX() <= 756)
+                                column = 9;
+                            else
+                                draggedImage = null;
+
+                        }
+                        else
+                            draggedImage = null;
+                        if(draggedImage != null) {
+                            if(draggedImage.getImage() == peaShooter.getImage()) {
+                                plants.add(new PeaShooter(column, row));
+                                draggedImage = null;
+                            }
+                            else if(draggedImage.getImage() == sunFlower.getImage()) {
+                                plants.add(new SunFlower(column, row));
+                                draggedImage = null;
+                            }
+                        }
+
+                    }
+                    /*if(draggedImage != null) {
+                        if(32 < e.getX() && e.getX() < 108)
+                            x = 1;
+                        else if(108 <= e.getX() && e.getX() < 183)
+                            x = 2;
+                        else if(183 <= e.getX() && e.getX() < 265)
+                            x = 3;
+                        else if(265 <= e.getX() && e.getX() < 352)
+                            x = 4;
+                        else if(352 <= e.getX() && e.getX() < 431)
+                            x = 5;
+                        else if(431 <= e.getX() && e.getX() < 517)
+                            x = 6;
+                        else if(517 <= e.getX() && e.getX() < 593)
+                            x = 7;
+                        else if(593 <= e.getX() && e.getX() < 667)
+                            x = 8;
+                        else if(667 <= e.getX() && e.getX() <= 756)
+                            x = 9;
+                        else
+                            draggedImage = null;
+                        if(110 < e.getY() && e.getY() < 181)
+                            y = 1;
+                        else if(181 < e.getY() && e.getY() < 274)
+                            y = 2;
+                        else if(274 < e.getY() && e.getY() < 378)
+                            y = 3;
+                        else if(378 < e.getY() && e.getY() < 468)
+                            y = 4;
+                        else if(468 < e.getY() && e.getY() < 571)
+                            y = 5;
+                        else
+                            draggedImage = null;
+                        if(draggedImage != null)
+                            plants.add(new PeaShooter(x, y));
+                        draggedImage = null;
+                    }*/
+            }
+        }
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
@@ -195,6 +289,13 @@ public class GameState {
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
+            switch (condition)  {
+                case 1:
+                    if(draggedImage != null) {
+                        tmpX = e.getX() - draggedImage.getIconWidth()/2;
+                        tmpY = e.getY() - draggedImage.getIconHeight();
+                    }
+            }
 		}
 
 		@Override

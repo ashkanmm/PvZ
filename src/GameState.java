@@ -118,27 +118,29 @@ public class GameState {
                  */
                 cnt++;
                 for(int i = 0; i < zombies.size(); i++) {
-                    if(zombies.get(i).x + zombies.get(i).imageIcon.getIconWidth() > 0 && cnt % 3 == 0) {
-                        zombies.get(i).x = zombies.get(i).x - 2;
+                    if(zombies.get(i).x + zombies.get(i).imageIcon.getIconWidth() < 0) {
+                        zombies.remove(i);
+                        i--;
+                        continue;
                     }
+                    else
+                        if(cnt %3 == 0)
+                            zombies.get(i).x = zombies.get(i).x - 2;
                     for(int j = 0; j < plants.size(); j++) {
-                        if(plants.get(j).getClass().equals(PeaShooter.class)) {
+                        if(plants.get(j).getClass().equals(PeaShooter.class) && plants.get(j).row == zombies.get(i).row) {
                             for(int k = 0; k < plants.get(j).bullets.size(); k++) {
-                                if(plants.get(j).bullets.get(k).x >= zombies.get(i).x) {
+                                if(zombies.get(i).x <=plants.get(j).bullets.get(k).x && plants.get(j).bullets.get(k).x <= zombies.get(i).x) {
                                     zombies.get(i).health--;
                                     plants.get(j).bullets.remove(k);
-                                    k--;
-                                    if(plants.get(i).bullets == null)
-                                        continue;
-                                    if(zombies.get(i).health < 1) {
-                                        zombies.remove(i);
-                                        i--;
-                                        if(zombies == null)
-                                            continue;
-                                    }
+                                    break;
                                 }
                             }
                         }
+                    }
+                    if(zombies.get(i).health < 1) {
+                        zombies.remove(i);
+                        i--;
+                        continue;
                     }
 
                 }
@@ -159,13 +161,14 @@ public class GameState {
                             for(int k = 0; k < zombies.size(); k++) {
                                 if(zombies.get(k).row == plants.get(i).row) {
                                     if(zombies.get(k).x - 7 <= plants.get(i).bullets.get(j).x && plants.get(i).bullets.get(j).x <= zombies.get(k).x) {
-                                        plants.get(i).bullets.remove(j);
-                                        j--;
                                         zombies.get(k).health--;
-                                        if(zombies.get(k).health < 0) {
-                                            zombies.remove(k);
-                                            continue;
-                                        }
+                                        plants.get(i).bullets.remove(j);
+                                        break;
+                                    }
+                                    if(zombies.get(k).health < 0) {
+                                        zombies.remove(k);
+                                        k--;
+                                        continue;
                                     }
                                 }
                             }

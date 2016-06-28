@@ -20,7 +20,7 @@ public class GameState {
     ImageIcon draggedImage = null;
     public int tmpX = 0;
     public int tmpY = 0;
-	MenuBar menuBar;
+	GamePanel menuBar;
 	LawnMower[] lawnMowers;
 	private KeyHandler keyHandler;
 	private MouseHandler mouseHandler;
@@ -78,7 +78,7 @@ public class GameState {
 			case 1:
 				backGround = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/backGround1.jpg");
 				grass = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chaman1.png");
-				menuBar = new MenuBar();
+				menuBar = new GamePanel();
                 lawnMowers[0] = new LawnMower(3);
                 /**
                  * here we randomly create new sun.

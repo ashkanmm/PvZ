@@ -4,11 +4,11 @@ import java.awt.*;
 /**
  * Created by ashkanmehrkar on 6/24/16.
  */
-public class MenuBar {
+public class GamePanel {
     public ImageIcon menuBarIcon;
     public ImageIcon peaShooterIcon;
     public ImageIcon sunflowerIcon;
-    public MenuBar() {
+    public GamePanel() {
         menuBarIcon = new ImageIcon("/Users/ashkanmehrkar/IntelliJ/jPvZ/src/Images/menuBar.png");
         peaShooterIcon= new ImageIcon("/Users/ashkanmehrkar/IntelliJ/jPvZ/src/Images/peaShooterIcon.png");
         sunflowerIcon = new ImageIcon("/Users/ashkanmehrkar/IntelliJ/jPvZ/src/Images/sunflowerIcon.png");

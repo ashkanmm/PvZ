@@ -90,10 +90,17 @@ public class GameState {
                 }
                 /**
                  * this loop, changes the suns' Y.
+                 * also checks if we reached end of the frame and removes the sun.
                  */
                 for(int i = 0; i < suns.size(); i++) {
                     if(suns.get(i).y < 600) {
                         suns.get(i).y = suns.get(i).y + 1;
+                    }
+                    else {
+                        suns.remove(i);
+                        i--;
+                        if(suns == null)
+                            continue;
                     }
                 }
                 /**
@@ -120,8 +127,15 @@ public class GameState {
                                 if(plants.get(j).bullets.get(k).x >= zombies.get(i).x) {
                                     zombies.get(i).health--;
                                     plants.get(j).bullets.remove(k);
-                                    if(zombies.get(i).health < 1)
+                                    k--;
+                                    if(plants.get(i).bullets == null)
+                                        continue;
+                                    if(zombies.get(i).health < 1) {
                                         zombies.remove(i);
+                                        i--;
+                                        if(zombies == null)
+                                            continue;
+                                    }
                                 }
                             }
                         }
@@ -132,24 +146,34 @@ public class GameState {
                  * we update the bullets' position.
                  * at the same time we check if any striking is happening or not.
                  */
-                for(Plant plant : plants) {
-                    if(plant.getClass().equals(PeaShooter.class)) {
-                        for(int i = 0; i < plant.bullets.size(); i++) {
-                            if(plant.bullets.get(i).x > 800)
-                                plant.bullets.remove(i);
+                for(int i = 0; i < plants.size(); i++) {
+                    if(plants.get(i).getClass().equals(PeaShooter.class)) {
+                        for(int j = 0; j < plants.get(i).bullets.size(); j++) {
+                            if(plants.get(i).bullets.get(j).x > 800) {
+                                plants.get(i).bullets.remove(j);
+                                j--;
+                                continue;
+                            }
                             else
-                                plant.bullets.get(i).x = plant.bullets.get(i).x + 7;
-                            for(int j = 0; j < zombies.size(); j++) {
-                                if(plant.bullets.get(i).x >= zombies.get(j).x) {
-                                    plant.bullets.remove(i);
-                                    zombies.get(j).health--;
-                                    if(zombies.get(j).health < 1)
-                                        zombies.remove(j);
+                                plants.get(i).bullets.get(j).x = plants.get(i).bullets.get(j).x + 7;
+                            for(int k = 0; k < zombies.size(); k++) {
+                                if(zombies.get(k).row == plants.get(i).row) {
+                                    if(zombies.get(k).x - 7 <= plants.get(i).bullets.get(j).x && plants.get(i).bullets.get(j).x <= zombies.get(k).x) {
+                                        plants.get(i).bullets.remove(j);
+                                        j--;
+                                        zombies.get(k).health--;
+                                        if(zombies.get(k).health < 0) {
+                                            zombies.remove(k);
+                                            continue;
+                                        }
+                                    }
                                 }
                             }
+
                         }
                     }
                 }
+
                 /**
                  * here we check if we have any attacking plants for the row at which the zombies are walking through so plants shoots bullets.
                  */
@@ -163,13 +187,17 @@ public class GameState {
                         }
                     }
                 }
-                /**
-                 * WaVe!!! :D
-                 */
-                if(zombieNumber == 8) {
-                    for(int i = 0; i < 5; i++)
-                        zombies.add(new NormalZombie(3));
-                }
+				/**
+				 * in this loop we check the state of all sunFlowers and produce sun.
+				 */
+				for(Plant plant : plants) {
+					if(plant.getClass().equals(SunFlower.class)) {
+						if(System.currentTimeMillis() - plant.last_sun > 25000) {
+                            suns.add(new Sun(plant.x, plant.y));
+                            plant.last_sun = System.currentTimeMillis();
+                        }
+					}
+				}
                 break;
 		}
 	}
@@ -226,7 +254,9 @@ public class GameState {
 						suns.get(i).getSun(e);
 						if(suns.get(i).existence == false) {
 							suns.remove(i);
-							score = score + 25;
+                            score = score + 25;
+                            i--;
+                            continue;
 						}
 					}
 					System.out.println(e.getX() + "   " + e.getY());

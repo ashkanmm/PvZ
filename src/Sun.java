@@ -17,6 +17,12 @@ public class Sun {
         x = random.nextInt(800 - sunIcon.getIconWidth()) + 0;
         y = 0;
     }
+    public Sun(int a, int b) {
+        sunIcon= new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sun.png");
+        existence = true;
+        x = a + 10;
+        y = b + 10;
+    }
 
     public boolean getSun(MouseEvent event) {
         if(x < event.getX() && event.getX() < x + sunIcon.getIconWidth() && y < event.getY() && event.getY() < y + sunIcon.getIconHeight()) {

@@ -5,7 +5,8 @@ import javax.swing.*;
  */
 public class SunFlower extends Plant {
     public SunFlower(int a, int b) {
-        imageIcon = new ImageIcon("/Users/ashkanmehrkar/IntelliJ/jPvZ/src/Images/Sunflower.png");
+        last_sun = System.currentTimeMillis();
+        imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
         row = b;
         column = a;
         if(a == 1)

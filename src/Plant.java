@@ -11,6 +11,7 @@ public abstract class Plant {
     protected int row;
     protected int column;
     public long last_bullet;
+    public long last_sun;
     protected ArrayList<Bullet> bullets;
     protected int price;
     public Plant() {

@@ -5,25 +5,24 @@ import javax.swing.*;
  */
 public class NormalZombie extends Zombie {
     public NormalZombie(int a) {
-        imageIcon = new ImageIcon("/Users/ashkanmehrkar/IntelliJ/jPvZ/src/Images/normalZombie.png");
+        imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/normalZombie.png");
         row = a;
         health = 5;
         switch (a) {
             case 3:
                 x = 800;
-                y = 395 - imageIcon.getIconHeight();
+                y = 390 - imageIcon.getIconHeight();
                 break;
 
             case 2:
                 x = 800;
-                y = 259 - imageIcon.getIconHeight();
+                y = 250 - imageIcon.getIconHeight();
                 break;
             case 4:
                 x = 800;
                 y = 462 - imageIcon.getIconHeight();
                 break;
         }
-
 
     }
 }

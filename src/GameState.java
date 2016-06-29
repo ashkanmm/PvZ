@@ -163,7 +163,7 @@ public class GameState {
                  * here we randomly create new zombies and check the limitation of zombie's number for the level.
                  */
                 double b1 = Math.random();
-                if(b1 > 0.999 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber <= 12) {
+                if(b1 > 0.995 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber <= 12) {
                     Random random = new Random();
                     int row = random.nextInt(4) + 2;
                     if(2 <= row && row <=4){
@@ -245,7 +245,8 @@ public class GameState {
 					if(407 < e.getX() && e.getX() < 729 && 97 < e.getY() && e.getY() < 203)
 						condition = 1;
 					break;
-				case 1:
+                case 2:
+                case 1:
 					for(int i = 0; i < suns.size(); i++) {
 						suns.get(i).getSun(e);
 						if(suns.get(i).existence == false) {
@@ -257,18 +258,7 @@ public class GameState {
 					}
 					System.out.println(e.getX() + "   " + e.getY());
 					break;
-                case 2:
-                    for(int i = 0; i < suns.size(); i++) {
-                        suns.get(i).getSun(e);
-                        if(suns.get(i).existence == false) {
-                            suns.remove(i);
-                            score = score + 25;
-                            i--;
-                            continue;
-                        }
-                    }
-                    System.out.println(e.getX() + "   " + e.getY());
-                    break;
+
 			}
 
 		}
@@ -276,6 +266,7 @@ public class GameState {
 		@Override
 		public void mousePressed(MouseEvent e) {
             switch (condition)  {
+                case 2:
                 case 1:
                     if(92 < e.getX() && e.getX() < 143 && 28 < e.getY() && e.getY() < 100 && score >= 50 && System.currentTimeMillis() - last_sunFlower > 3000) {
                         draggedImage = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
@@ -290,20 +281,6 @@ public class GameState {
 						last_peaShooter = System.currentTimeMillis();
                     }
                     break;
-                case 2:
-                    if(92 < e.getX() && e.getX() < 143 && 28 < e.getY() && e.getY() < 100 && score >= 50 && System.currentTimeMillis() - last_sunFlower > 3000) {
-                        draggedImage = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
-                        tmpX = e.getX() - draggedImage.getIconWidth()/2;
-                        tmpY = e.getY() - draggedImage.getIconHeight();
-                        last_sunFlower = System.currentTimeMillis();
-                    }
-                    else if(150 < e.getX() && e.getX() < 200 && 30 < e.getY() && e.getY() < 100 && score >=100 && System.currentTimeMillis() - last_peaShooter > 5000) {
-                        draggedImage = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/peaShooter.png");
-                        tmpX = e.getX() - draggedImage.getIconWidth()/2;
-                        tmpY = e.getY() - draggedImage.getIconHeight();
-                        last_peaShooter = System.currentTimeMillis();
-                    }
-                    break;
             }
 		}
 
@@ -313,30 +290,13 @@ public class GameState {
             ImageIcon peaShooter = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/peaShooter.png");
             ImageIcon sunFlower = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
             switch (condition) {
+                case 2:
                 case 1:
                     if(draggedImage != null) {
-                        if(274 < e.getY() && e.getY() < 378) {
-                            row = 3;
-                            if(32 < e.getX() && e.getX() < 108)
-                                column = 1;
-                            else if(108 <= e.getX() && e.getX() < 183)
-                                column = 2;
-                            else if(183 <= e.getX() && e.getX() < 265)
-                                column = 3;
-                            else if(265 <= e.getX() && e.getX() < 352)
-                                column = 4;
-                            else if(352 <= e.getX() && e.getX() < 431)
-                                column = 5;
-                            else if(431 <= e.getX() && e.getX() < 517)
-                                column = 6;
-                            else if(517 <= e.getX() && e.getX() < 593)
-                                column = 7;
-                            else if(593 <= e.getX() && e.getX() < 667)
-                                column = 8;
-                            else if(667 <= e.getX() && e.getX() <= 756)
-                                column = 9;
-                            else
-                                draggedImage = null;
+                        row = rowIdentifier(e);
+                        column = columnIdentifier(e);
+                        if(row == 0 || column == 0)
+                            draggedImage = null;
 
                         }
                         else
@@ -357,44 +317,6 @@ public class GameState {
                         }
 
                     }
-                    /*if(draggedImage != null) {
-                        if(32 < e.getX() && e.getX() < 108)
-                            x = 1;
-                        else if(108 <= e.getX() && e.getX() < 183)
-                            x = 2;
-                        else if(183 <= e.getX() && e.getX() < 265)
-                            x = 3;
-                        else if(265 <= e.getX() && e.getX() < 352)
-                            x = 4;
-                        else if(352 <= e.getX() && e.getX() < 431)
-                            x = 5;
-                        else if(431 <= e.getX() && e.getX() < 517)
-                            x = 6;
-                        else if(517 <= e.getX() && e.getX() < 593)
-                            x = 7;
-                        else if(593 <= e.getX() && e.getX() < 667)
-                            x = 8;
-                        else if(667 <= e.getX() && e.getX() <= 756)
-                            x = 9;
-                        else
-                            draggedImage = null;
-                        if(110 < e.getY() && e.getY() < 181)
-                            y = 1;
-                        else if(181 < e.getY() && e.getY() < 274)
-                            y = 2;
-                        else if(274 < e.getY() && e.getY() < 378)
-                            y = 3;
-                        else if(378 < e.getY() && e.getY() < 468)
-                            y = 4;
-                        else if(468 < e.getY() && e.getY() < 571)
-                            y = 5;
-                        else
-                            draggedImage = null;
-                        if(draggedImage != null)
-                            plants.add(new PeaShooter(x, y));
-                        draggedImage = null;
-                    }*/
-            }
         }
 
 		@Override
@@ -409,11 +331,13 @@ public class GameState {
 		@Override
 		public void mouseDragged(MouseEvent e) {
             switch (condition)  {
+                case 2:
                 case 1:
                     if(draggedImage != null) {
                         tmpX = e.getX() - draggedImage.getIconWidth()/2;
                         tmpY = e.getY() - draggedImage.getIconHeight();
                     }
+                    break;
             }
 		}
 
@@ -507,7 +431,7 @@ public class GameState {
             for(int j = 0; j < plants.size(); j++) {
                 if(plants.get(j).getClass().equals(PeaShooter.class)) {
                     for(int k = 0; k < plants.get(j).bullets.size(); k++) {
-                        if(plants.get(j).bullets.get(k).x >= zombies.get(i).x - 7 && plants.get(j).bullets.get(k).x <= zombies.get(i).x) {
+                        if(plants.get(j).bullets.get(k).x >= zombies.get(i).x - 7 && plants.get(j).bullets.get(k).x <= zombies.get(i).x && plants.get(j).row == zombies.get(i).row) {
                             plants.get(j).bullets.remove(k);
                             k--;
                             zombies.get(i).health--;
@@ -613,6 +537,42 @@ public class GameState {
                 }
             }
         }
+    }
+    private int columnIdentifier(MouseEvent e) {
+        if(32 < e.getX() && e.getX() < 108)
+            return  1;
+        else if(108 <= e.getX() && e.getX() < 183)
+            return  2;
+        else if(183 <= e.getX() && e.getX() < 265)
+            return  3;
+        else if(265 <= e.getX() && e.getX() < 352)
+            return  4;
+        else if(352 <= e.getX() && e.getX() < 431)
+            return  5;
+        else if(431 <= e.getX() && e.getX() < 517)
+            return  6;
+        else if(517 <= e.getX() && e.getX() < 593)
+            return  7;
+        else if(593 <= e.getX() && e.getX() < 667)
+            return  8;
+        else if(667 <= e.getX() && e.getX() <= 756)
+            return  9;
+        else
+            return 0;
+    }
+    private int rowIdentifier(MouseEvent e) {
+        if(110 < e.getY() && e.getY() < 181)
+            return 1;
+        else if(181 < e.getY() && e.getY() < 274)
+            return 2;
+        else if(274 < e.getY() && e.getY() < 378)
+            return 3;
+        else if(378 < e.getY() && e.getY() < 468)
+            return 4;
+        else if(468 < e.getY() && e.getY() < 571)
+            return 5;
+        else
+            return 0;
     }
 
 }

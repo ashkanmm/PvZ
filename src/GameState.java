@@ -178,6 +178,23 @@ public class GameState {
                  * at the same time we check if there is any plants in front  of the zombie so it attacks the plants.
                  */
                 zombieMovement();
+                /**
+                 * checking lawnmower states and activating the if necessary.
+                 */
+                lawnMoverCheck();
+                /**
+                 * we update the bullets' position.
+                 * at the same time we check if any striking is happening or not.
+                 */
+                bulletMovement();
+                /**
+                 * here we check if we have any attacking plants for the row at which the zombies are walking through so plants shoots bullets.
+                 */
+                bulletShooting();
+                /**
+                 * in this loop we check the state of all sunFlowers and produce sun.
+                 */
+                sunFlowerProduction();
 
 
 		}
@@ -241,6 +258,15 @@ public class GameState {
 					System.out.println(e.getX() + "   " + e.getY());
 					break;
                 case 2:
+                    for(int i = 0; i < suns.size(); i++) {
+                        suns.get(i).getSun(e);
+                        if(suns.get(i).existence == false) {
+                            suns.remove(i);
+                            score = score + 25;
+                            i--;
+                            continue;
+                        }
+                    }
                     System.out.println(e.getX() + "   " + e.getY());
                     break;
 			}
@@ -263,6 +289,21 @@ public class GameState {
                         tmpY = e.getY() - draggedImage.getIconHeight();
 						last_peaShooter = System.currentTimeMillis();
                     }
+                    break;
+                case 2:
+                    if(92 < e.getX() && e.getX() < 143 && 28 < e.getY() && e.getY() < 100 && score >= 50 && System.currentTimeMillis() - last_sunFlower > 3000) {
+                        draggedImage = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
+                        tmpX = e.getX() - draggedImage.getIconWidth()/2;
+                        tmpY = e.getY() - draggedImage.getIconHeight();
+                        last_sunFlower = System.currentTimeMillis();
+                    }
+                    else if(150 < e.getX() && e.getX() < 200 && 30 < e.getY() && e.getY() < 100 && score >=100 && System.currentTimeMillis() - last_peaShooter > 5000) {
+                        draggedImage = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/peaShooter.png");
+                        tmpX = e.getX() - draggedImage.getIconWidth()/2;
+                        tmpY = e.getY() - draggedImage.getIconHeight();
+                        last_peaShooter = System.currentTimeMillis();
+                    }
+                    break;
             }
 		}
 

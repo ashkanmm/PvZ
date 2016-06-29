@@ -118,6 +118,32 @@ public class GameFrame extends JFrame {
                     g2d.drawImage(state.lawnMowers.get(i).imageIcon.getImage(), state.lawnMowers.get(i).x, state.lawnMowers.get(i).y, null);
                 }
                 break;
+			case 2:
+				g2d.drawImage(state.backGround.getImage(), 0, 0, null);
+				g2d.drawImage(state.menuBar.menuBarIcon.getImage(), 10, 20, null);
+				g2d.drawImage(state.menuBar.sunflowerIcon.getImage(), 90, 25, null);
+				g2d.drawImage(state.menuBar.peaShooterIcon.getImage(), 90+ state.menuBar.sunflowerIcon.getIconWidth()+ 5, 25, null);
+				for(int i = 0; i < state.zombies.size(); i++)
+					g2d.drawImage(state.zombies.get(i).imageIcon.getImage(), state.zombies.get(i).x, state.zombies.get(i).y, null);
+				for(Plant plant : state.plants) {
+					g2d.drawImage(plant.imageIcon.getImage(), plant.x, plant.y, null);
+					if(plant.getClass().equals(PeaShooter.class)) {
+						for(int j = 0; j < plant.bullets.size(); j++) {
+							g2d.drawImage(plant.bullets.get(j).imageIcon.getImage(), plant.bullets.get(j).x, plant.bullets.get(j).y, null);
+						}
+
+					}
+				}
+				if(state.draggedImage != null) {
+					g2d.drawImage(state.draggedImage.getImage(), state.tmpX, state.tmpY, null);
+				}
+				g2d.drawString(String.valueOf(state.score), 40, 100);
+				for(int i = 0; i < state.suns.size(); i++)
+					g2d.drawImage(state.suns.get(i).sunIcon.getImage(), state.suns.get(i).x, state.suns.get(i).y, null);
+				for(int i = 0; i < state.lawnMowers.size(); i++) {
+					g2d.drawImage(state.lawnMowers.get(i).imageIcon.getImage(), state.lawnMowers.get(i).x, state.lawnMowers.get(i).y, null);
+				}
+				break;
 		}
 
 	}

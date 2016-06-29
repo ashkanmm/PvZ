@@ -14,29 +14,29 @@ public class LawnMower {
         turnOn = false;
         imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chamanZan.png");
         switch (a) {
-            case 3:
+            case 1:
                 x = -50;
-                y = 275;
-                row = 3;
+                y = 144 - imageIcon.getIconHeight();
+                row = 1;
                 break;
             case 2:
                 x = -50;
-                y = 175;
+                y = 268 - imageIcon.getIconHeight();
                 row = 2;
+                break;
+            case 3:
+                x = -50;
+                y = 357 - imageIcon.getIconHeight();
+                row = 3;
                 break;
             case 4:
                 x = -50;
-                y = 375;
+                y = 465 - imageIcon.getIconHeight();
                 row = 4;
-                break;
-            case 1:
-                x = -50;
-                y = 175;
-                row = 1;
                 break;
             case 5:
                 x = -50;
-                y = 475;
+                y = 568 - imageIcon.getIconHeight();
                 row = 5;
                 break;
 

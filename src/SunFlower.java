@@ -9,6 +9,7 @@ public class SunFlower extends Plant {
         imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
         row = b;
         column = a;
+        health = 5;
         if(a == 1)
             x = 70 - imageIcon.getIconWidth()/2;
         else if(a == 2)

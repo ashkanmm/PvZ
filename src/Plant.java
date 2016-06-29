@@ -13,7 +13,7 @@ public abstract class Plant {
     public long last_bullet;
     public long last_sun;
     protected ArrayList<Bullet> bullets;
-    protected int price;
+    public int health;
     public Plant() {
 
     }

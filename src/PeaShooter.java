@@ -10,6 +10,7 @@ public class PeaShooter extends Plant {
         column = a;
         row = b;
         last_bullet = 0;
+        health = 10;
         if(a == 1)
             x = 70 - imageIcon.getIconWidth()/2;
         else if(a == 2)

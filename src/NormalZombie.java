@@ -14,6 +14,14 @@ public class NormalZombie extends Zombie {
                 y = 395 - imageIcon.getIconHeight();
                 break;
 
+            case 2:
+                x = 800;
+                y = 259 - imageIcon.getIconHeight();
+                break;
+            case 4:
+                x = 800;
+                y = 462 - imageIcon.getIconHeight();
+                break;
         }
 
 

@@ -59,7 +59,7 @@ public class GameState {
         for(int i = 0; i < 5; i++) {
             lawnMowers.add(new LawnMower(i+1));
         }
-		condition = 2;
+		condition = -3;
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
 	}
@@ -291,6 +291,30 @@ public class GameState {
             ImageIcon sunFlower = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
             switch (condition) {
                 case 2:
+                    if(draggedImage != null) {
+                        row = rowIdentifier(e);
+                        column = columnIdentifier(e);
+                        if(row == 0 || column == 0)
+                            draggedImage = null;
+
+                    }
+                    else
+                        draggedImage = null;
+                    if(draggedImage != null) {
+                        if(draggedImage.getImage() == peaShooter.getImage() && freeSpace(column, row) && 2 <= row && row <= 4) {
+                            plants.add(new PeaShooter(column, row));
+                            draggedImage = null;
+                            score = score - 100;
+                        }
+                        else if(draggedImage.getImage() == sunFlower.getImage() && freeSpace(column, row) && 2 <= row && row <= 4) {
+                            plants.add(new SunFlower(column, row));
+                            draggedImage = null;
+                            score = score - 50;
+                        }
+                        else
+                            draggedImage = null;
+                    }
+                    break;
                 case 1:
                     if(draggedImage != null) {
                         row = rowIdentifier(e);
@@ -302,12 +326,12 @@ public class GameState {
                         else
                             draggedImage = null;
                         if(draggedImage != null) {
-                            if(draggedImage.getImage() == peaShooter.getImage() && freeSpace(column, row)) {
+                            if(draggedImage.getImage() == peaShooter.getImage() && freeSpace(column, row) && row ==3) {
                                 plants.add(new PeaShooter(column, row));
                                 draggedImage = null;
 								score = score - 100;
                             }
-                            else if(draggedImage.getImage() == sunFlower.getImage() && freeSpace(column, row)) {
+                            else if(draggedImage.getImage() == sunFlower.getImage() && freeSpace(column, row) && row ==3) {
                                 plants.add(new SunFlower(column, row));
                                 draggedImage = null;
 								score = score - 50;
@@ -316,7 +340,7 @@ public class GameState {
                                 draggedImage = null;
                         }
 
-                    }
+            }
         }
 
 		@Override

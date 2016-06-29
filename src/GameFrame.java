@@ -17,7 +17,6 @@ public class GameFrame extends JFrame {
 	
 	public static final int GAME_HEIGHT = 600;                  // 720p game resolution
 	public static final int GAME_WIDTH = 800;  // wide aspect ratio
-	private int cnt = 0;
 	private BufferStrategy bufferStrategy;
 	private long last_sun = 0;
 	{

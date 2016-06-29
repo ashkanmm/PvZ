@@ -21,7 +21,7 @@ public class GameState {
     public int tmpX = 0;
     public int tmpY = 0;
 	GamePanel menuBar;
-	LawnMower[] lawnMowers;
+	public ArrayList<LawnMower> lawnMowers;
 	private KeyHandler keyHandler;
 	private MouseHandler mouseHandler;
 	public ArrayList<Sun> suns;
@@ -48,7 +48,10 @@ public class GameState {
 		suns = new ArrayList<Sun>();
 		plants = new ArrayList<Plant>();
 		zombies = new ArrayList<Zombie>();
-		lawnMowers = new LawnMower[5];
+		lawnMowers = new ArrayList<LawnMower>();
+        for(int i = 0; i < 5; i++) {
+            lawnMowers.add(new LawnMower(i+1));
+        }
 		condition = -3;
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
@@ -79,7 +82,6 @@ public class GameState {
 				backGround = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/backGround1.jpg");
 				grass = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chaman1.png");
 				menuBar = new GamePanel();
-                lawnMowers[0] = new LawnMower(3);
                 /**
                  * here we randomly create new sun.
                  */
@@ -113,37 +115,61 @@ public class GameState {
                     zombieNumber++;
                 }
                 /**
-                 * here we change the position of zombies which we have.
+                 * updating zombies' position.
                  * at the same time we check if any striking is happening and then remove the bullet and decrease the zombie's health.
                  */
                 cnt++;
+                zombieLoop:
                 for(int i = 0; i < zombies.size(); i++) {
-                    if(zombies.get(i).x + zombies.get(i).imageIcon.getIconWidth() < 0) {
-                        zombies.remove(i);
-                        i--;
-                        continue;
+                    if(zombies.get(i).x + zombies.get(i).imageIcon.getIconWidth() > 0 && cnt % 3 == 0) {
+                        zombies.get(i).x = zombies.get(i).x - 2;
+                        /*if(zombies.get(i).x <= 53) {
+                            for(int z = 0; z < lawnMowers.size(); z++) {
+                                if(zombies.get(i).row ==lawnMowers.get(z).row && !lawnMowers.get(z).turnOn) {
+                                    lawnMowers.get(z).turnOn = true;
+                                }
+                            }
+                        }*/
                     }
-                    else
-                        if(cnt %3 == 0)
-                            zombies.get(i).x = zombies.get(i).x - 2;
                     for(int j = 0; j < plants.size(); j++) {
-                        if(plants.get(j).getClass().equals(PeaShooter.class) && plants.get(j).row == zombies.get(i).row) {
+                        if(plants.get(j).getClass().equals(PeaShooter.class)) {
                             for(int k = 0; k < plants.get(j).bullets.size(); k++) {
-                                if(zombies.get(i).x <=plants.get(j).bullets.get(k).x && plants.get(j).bullets.get(k).x <= zombies.get(i).x) {
-                                    zombies.get(i).health--;
+                                if(plants.get(j).bullets.get(k).x >= zombies.get(i).x - 7 && plants.get(j).bullets.get(k).x <= zombies.get(i).x) {
                                     plants.get(j).bullets.remove(k);
-                                    break;
+                                    k--;
+                                    zombies.get(i).health--;
+                                    if(zombies.get(i).health < 0) {
+                                        zombies.remove(i);
+                                        i--;
+                                        //soaaaaal
+                                        continue zombieLoop;
+                                    }
                                 }
                             }
                         }
                     }
-                    if(zombies.get(i).health < 1) {
-                        zombies.remove(i);
-                        i--;
-                        continue;
-                    }
 
                 }
+                /**
+                 * checking lawnmover states and activating the if necessary.
+                 */
+                /*for(int i = 0 ; i < lawnMowers.size(); i++) {
+                    if(lawnMowers.get(i).turnOn) {
+                        if(lawnMowers.get(i).x < )
+                        lawnMowers.get(i).move();
+                        for(int j = 0; j < zombies.size(); j++) {
+                            if(zombies.get(j).row == lawnMowers.get(i).row && lawnMowers.get(i).x + lawnMowers.get(i).imageIcon.getIconWidth() + 5<=zombies.get(i).x) {
+                                zombies.remove(j);
+                                j--;
+                                continue;
+                            }
+                        }
+                    }
+                    if(lawnMowers.get(i).x > 800) {
+                        lawnMowers.remove(i);
+                        i--;
+                    }
+                }*/
                 /**
                  * we update the bullets' position.
                  * at the same time we check if any striking is happening or not.
@@ -162,13 +188,13 @@ public class GameState {
                                 if(zombies.get(k).row == plants.get(i).row) {
                                     if(zombies.get(k).x - 7 <= plants.get(i).bullets.get(j).x && plants.get(i).bullets.get(j).x <= zombies.get(k).x) {
                                         zombies.get(k).health--;
+                                        if(zombies.get(k).health < 0) {
+                                            zombies.remove(k);
+                                            k--;
+                                        }
                                         plants.get(i).bullets.remove(j);
+                                        j--;
                                         break;
-                                    }
-                                    if(zombies.get(k).health < 0) {
-                                        zombies.remove(k);
-                                        k--;
-                                        continue;
                                     }
                                 }
                             }

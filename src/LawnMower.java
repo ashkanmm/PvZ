@@ -6,10 +6,12 @@ import java.awt.*;
  */
 public class LawnMower {
     ImageIcon imageIcon;
-    int x;
+    public int x;
     int y;
-    private int row;
+    public int row;
+    public boolean turnOn;
     public LawnMower(int a) {
+        turnOn = false;
         imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chamanZan.png");
         switch (a) {
             case 3:
@@ -40,21 +42,8 @@ public class LawnMower {
 
         }
     }
-    public void move(final Graphics g) {
-        new Thread(){
-            @Override
-            public void run() {
-                while(x< 800){
-                    x= x+ 1;
-                    paint(g);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }.start();
+    public void move() {
+        this.x = this.x + 5;
     }
     public void paint(Graphics g) {
         g.drawImage(imageIcon.getImage(), x, y, null);

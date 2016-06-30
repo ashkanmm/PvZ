@@ -8,10 +8,11 @@ public class NormalZombie extends Zombie {
         imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/normalZombie.png");
         row = a;
         health = 5;
+        speed = 3;
         switch (a) {
             case 3:
                 x = 800;
-                y = 390 - imageIcon.getIconHeight();
+                y = 369 - imageIcon.getIconHeight();
                 break;
 
             case 2:

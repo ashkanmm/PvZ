@@ -139,6 +139,8 @@ public class GameFrame extends JFrame {
 				g2d.drawImage(state.menuBar.menuBarIcon.getImage(), 10, 20, null);
 				g2d.drawImage(state.menuBar.sunflowerIcon.getImage(), 90, 25, null);
 				g2d.drawImage(state.menuBar.peaShooterIcon.getImage(), 90+ state.menuBar.sunflowerIcon.getIconWidth()+ 5, 25, null);
+				g2d.drawImage(state.menuBar.walnutIcon.getImage(),90+ state.menuBar.sunflowerIcon.getIconWidth()+ 5 + state.menuBar
+				.peaShooterIcon.getIconWidth() + 5, 25, null);
 				for(int i = 0; i < state.zombies.size(); i++)
 					g2d.drawImage(state.zombies.get(i).imageIcon.getImage(), state.zombies.get(i).x, state.zombies.get(i).y, null);
 				g2d.drawString(String.valueOf(state.score), 40, 100);

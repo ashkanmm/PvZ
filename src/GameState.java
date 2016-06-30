@@ -40,9 +40,10 @@ public class GameState {
 	private int cnt = 0;
 	private long last_sunFlower = 0;
 	private long last_peaShooter = 0;
+    private long last_walnut = 0;
     private int cnt1 = 0;
-    private int waveCounter = 0;
-    private boolean wave = false;
+    private int cnt2 = 0;
+    private int wave = 0;
 	
 	public GameState() {
 		//
@@ -51,7 +52,7 @@ public class GameState {
         draggedImage = null;
         tmpY = 0;
         tmpX = 0;
-		score = 50;
+		score = 400;
 		suns = new ArrayList<Sun>();
 		plants = new ArrayList<Plant>();
 		zombies = new ArrayList<Zombie>();
@@ -59,7 +60,7 @@ public class GameState {
         for(int i = 0; i < 5; i++) {
             lawnMowers.add(new LawnMower(i+1));
         }
-		condition = -3;
+		condition = 2;
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
 	}
@@ -89,115 +90,156 @@ public class GameState {
 				backGround = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/backGround1.jpg");
 				grass = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chaman1.png");
 				menuBar = new GamePanel();
-                /**
-                 * here we randomly create new sun.
-                 */
+
                 sunCreating();
-                /**
-                 * this loop, changes the suns' Y.
-                 * also checks if we reached end of the frame and removes the sun.
-                 */
+
                 sunMovement();
                 /**
                  * here we randomly create new zombies and check the limitation of zombie's number for the level.
                  */
                 double b = Math.random();
-                if(b > 0.999 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber <=7) {
+                if(b > 0.999 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber < 7) {
                     zombies.add(new NormalZombie(3));
                     last_Zombie = System.currentTimeMillis();
                     zombieNumber++;
                 }
-                /**
-                 * updating zombies' position.
-                 * at the same time we check if any striking is happening and then remove the bullet and decrease the zombie's health.
-                 * at the same time we check if there is any plants in front  of the zombie so it attacks the plants.
-                 */
+
                 zombieMovement();
-                /**
-                 * checking lawnmower states and activating the if necessary.
-                 */
+
                 lawnMoverCheck();
-                /**
-                 * we update the bullets' position.
-                 * at the same time we check if any striking is happening or not.
-                 */
+
                 bulletMovement();
-                /**
-                 * here we check if we have any attacking plants for the row at which the zombies are walking through so plants shoots bullets.
-                 */
+
                 bulletShooting();
-				/**
-				 * in this loop we check the state of all sunFlowers and produce sun.
-				 */
+
 				sunFlowerProduction();
                 /**
                  * WaVe!!!! :D
                  */
-                if(zombieNumber ==7 && zombies.size() ==0 )
-                    wave = true;
-                if(wave){
-                    waveCounter++;
-                    if(waveCounter % 100 == 0 && zombieNumber <= 12) {
-                        zombies.add(new NormalZombie(3));
-                        zombieNumber++;
-                        if(zombieNumber==12 && zombies.size()==0){
-                            infoReset();
-                            condition=2;
-                        }
+                if(zombieNumber == 7 && zombies.size() == 0 )
+                    wave = 1;
+
+                if(wave == 1){
+                    cnt2++;
+                    if(cnt2 % 100 == 0 && zombieNumber < 12) {
+                        randomZombieCreator(condition);
                     }
                 }
+                if(zombieNumber == 12 && zombies.size()== 0){
+                    infoReset();
+                    condition = 2;
+                }
+
                 break;
             case 2:
                 backGround = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/backGround3.png");
+
                 menuBar = new GamePanel();
-                /**
-                 * here we randomly create new sun.
-                 */
+
                 sunCreating();
-                /**
-                 * this loop, changes the suns' Y.
-                 * also checks if we reached end of the frame and removes the sun.
-                 */
+
                 sunMovement();
                 /**
-                 * here we randomly create new zombies and check the limitation of zombie's number for the level.
+                 * randomly creating zombies.
+                 * checking zombies limitation.
+                 * checking which kind of zombie to create.
                  */
                 double b1 = Math.random();
-                if(b1 > 0.995 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber <= 12) {
+                if(b1 > 0.997 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber < 10) {
                     Random random = new Random();
                     int row = random.nextInt(4) + 2;
-                    if(2 <= row && row <=4){
-                        zombies.add(new NormalZombie(row));
-                        last_Zombie = System.currentTimeMillis();
-                        zombieNumber++;
+                    int kind = random.nextInt(2) + 1;
+                    if(2 <= row && row <=4 && 1<=kind && kind<= 2){
+                        if(kind ==1) {
+                            zombies.add(new NormalZombie(row));
+                            last_Zombie = System.currentTimeMillis();
+                            zombieNumber++;
+                        }
+                        else if(kind ==2) {
+                            zombies.add(new BucketHeadZombie(row));
+                            last_Zombie = System.currentTimeMillis();
+                            zombieNumber++;
+                        }
                     }
                 }
-                /**
-                 * updating zombies' position.
-                 * at the same time we check if any striking is happening and then remove the bullet and decrease the zombie's health.
-                 * at the same time we check if there is any plants in front  of the zombie so it attacks the plants.
-                 */
+
                 zombieMovement();
-                /**
-                 * checking lawnmower states and activating the if necessary.
-                 */
+
                 lawnMoverCheck();
-                /**
-                 * we update the bullets' position.
-                 * at the same time we check if any striking is happening or not.
-                 */
+
                 bulletMovement();
-                /**
-                 * here we check if we have any attacking plants for the row at which the zombies are walking through so plants shoots bullets.
-                 */
+
                 bulletShooting();
-                /**
-                 * in this loop we check the state of all sunFlowers and produce sun.
-                 */
+
                 sunFlowerProduction();
 
+                /**
+                 * WaVe!!!! :D
+                 */
+                if(zombieNumber == 10 && zombies.size() == 0) {
+                    wave = 1;
+                    System.out.println("wave 1");
+                }
 
-		}
+                if(wave == 1){
+                    cnt2++;
+                    if(cnt2 % 100 == 0 && zombieNumber < 14)
+                        randomZombieCreator(condition);
+                }
+                if(zombieNumber == 14 && zombies.size() == 0) {
+                    wave = 2;
+                    System.out.println("wave 2");
+                }
+
+                if(wave ==2) {
+                    cnt2++;
+                    if(cnt2 % 100 == 0 && zombieNumber < 18)
+                        randomZombieCreator(2);
+                }
+                if(zombieNumber == 18 && zombies.size() == 0) {
+                    infoReset();
+                    condition = 3;
+                }
+                break;
+            case 3:
+                backGround = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/backGround3.png");
+
+                menuBar = new GamePanel();
+
+                sunCreating();
+
+                sunMovement();
+                /**
+                 * randomly creating zombies.
+                 * checking zombies limitation.
+                 * checking which kind of zombie to create.
+                 */
+                double b3 = Math.random();
+                if(b3 > 0.997 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber < 13) {
+                    Random random = new Random();
+                    int row = random.nextInt(4) + 2;
+                    int kind = random.nextInt(2) + 1;
+                    if(2 <= row && row <=4 && 1<=kind && kind<= 2){
+                        if(kind ==1) {
+                            zombies.add(new NormalZombie(row));
+                            last_Zombie = System.currentTimeMillis();
+                            zombieNumber++;
+                        }
+                        else if(kind == 2) {
+                            zombies.add(new BucketHeadZombie(row));
+                            last_Zombie = System.currentTimeMillis();
+                            zombieNumber++;
+                        }
+                        else if(kind == 3) {
+
+                        }
+                    }
+                }
+
+
+
+
+        }
 	}
 	
 	
@@ -267,6 +309,12 @@ public class GameState {
 		public void mousePressed(MouseEvent e) {
             switch (condition)  {
                 case 2:
+                    if(207<=e.getX() && e.getX()<=260 && 27<e.getY() && e.getY()<=101 && score>=50 && System.currentTimeMillis() - last_walnut > 7000) {
+                        draggedImage = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/walnut.png");
+                        tmpX = e.getX() - draggedImage.getIconWidth()/2;
+                        tmpY = e.getY() - draggedImage.getIconHeight();
+                        last_walnut = System.currentTimeMillis();
+                    }
                 case 1:
                     if(92 < e.getX() && e.getX() < 143 && 28 < e.getY() && e.getY() < 100 && score >= 50 && System.currentTimeMillis() - last_sunFlower > 3000) {
                         draggedImage = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
@@ -289,6 +337,7 @@ public class GameState {
             int column = 0, row = 0;
             ImageIcon peaShooter = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/peaShooter.png");
             ImageIcon sunFlower = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
+            ImageIcon walnut = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/walnut.png");
             switch (condition) {
                 case 2:
                     if(draggedImage != null) {
@@ -296,7 +345,6 @@ public class GameState {
                         column = columnIdentifier(e);
                         if(row == 0 || column == 0)
                             draggedImage = null;
-
                     }
                     else
                         draggedImage = null;
@@ -308,6 +356,11 @@ public class GameState {
                         }
                         else if(draggedImage.getImage() == sunFlower.getImage() && freeSpace(column, row) && 2 <= row && row <= 4) {
                             plants.add(new SunFlower(column, row));
+                            draggedImage = null;
+                            score = score - 50;
+                        }
+                        else if(draggedImage.getImage() == walnut.getImage() && freeSpace(column, row) && 2 <= row && row <= 4) {
+                            plants.add(new Walnut(column, row));
                             draggedImage = null;
                             score = score - 50;
                         }
@@ -420,14 +473,19 @@ public class GameState {
         last_sunFlower = 0;
         last_peaShooter = 0;
         cnt1 = 0;
-        waveCounter = 0;
-        wave = false;
+        cnt2 = 0;
+        wave = 0;
     }
+    /**
+     * updating zombies' position.
+     * at the same time we check if any striking is happening and then remove the bullet and decrease the zombie's health.
+     * at the same time we check if there is any plants in front  of the zombie so it attacks the plants.
+     */
     private void zombieMovement() {
         cnt++;
         zombieLoop:
         for(int i = 0; i < zombies.size(); i++) {
-            if(zombies.get(i).x + zombies.get(i).imageIcon.getIconWidth() > 0 && cnt % 3 == 0 && availableMoving(zombies.get(i))) {
+            if(zombies.get(i).x + zombies.get(i).imageIcon.getIconWidth() > 0 && cnt % zombies.get(i).speed == 0 && availableMoving(zombies.get(i))) {
                 zombies.get(i).x = zombies.get(i).x - 2;
                 if(zombies.get(i).x <= 53) {
                     for(int z = 0; z < lawnMowers.size(); z++) {
@@ -459,7 +517,7 @@ public class GameState {
                             plants.get(j).bullets.remove(k);
                             k--;
                             zombies.get(i).health--;
-                            if(zombies.get(i).health < 0) {
+                            if(zombies.get(i).health < 1) {
                                 zombies.remove(i);
                                 i--;
                                 continue zombieLoop;
@@ -471,6 +529,9 @@ public class GameState {
 
         }
     }
+    /**
+     * here we randomly create new sun.
+     */
     private void sunCreating() {
         double a1 = Math.random();
         if(a1 > 0.9999 - ((System.currentTimeMillis() - last_sun) / 1000) * 0.0005) {
@@ -478,6 +539,10 @@ public class GameState {
             last_sun = System.currentTimeMillis();
         }
     }
+    /**
+     * this loop, changes the suns' Y.
+     * also checks if we reached end of the frame and removes the sun.
+     */
     private void sunMovement() {
         for(int i = 0; i < suns.size(); i++) {
             if(suns.get(i).y < 600) {
@@ -491,6 +556,9 @@ public class GameState {
             }
         }
     }
+    /**
+     * checking lawnmower states and activating the if necessary.
+     */
     private void lawnMoverCheck() {
         for(int i = 0 ; i < lawnMowers.size(); i++) {
             if(lawnMowers.get(i).turnOn) {
@@ -510,6 +578,10 @@ public class GameState {
             }
         }
     }
+    /**
+     * we update the bullets' position.
+     * at the same time we check if any striking is happening or not.
+     */
     private void bulletMovement() {
         for(int i = 0; i < plants.size(); i++) {
             if(plants.get(i).getClass().equals(PeaShooter.class)) {
@@ -525,7 +597,7 @@ public class GameState {
                         if(zombies.get(k).row == plants.get(i).row) {
                             if(zombies.get(k).x - 7 <= plants.get(i).bullets.get(j).x && plants.get(i).bullets.get(j).x <= zombies.get(k).x) {
                                 zombies.get(k).health--;
-                                if(zombies.get(k).health < 0) {
+                                if(zombies.get(k).health < 1) {
                                     zombies.remove(k);
                                     k--;
                                 }
@@ -540,6 +612,9 @@ public class GameState {
             }
         }
     }
+    /**
+     * here we check if we have any attacking plants for the row at which the zombies are walking through so plants shoots bullets.
+     */
     private void bulletShooting() {
         for(int i = 0; i < zombies.size(); i++) {
             for(Plant plant : plants) {
@@ -552,6 +627,9 @@ public class GameState {
             }
         }
     }
+    /**
+     * in this loop we check the state of all sunFlowers and produce sun.
+     */
     private void sunFlowerProduction() {
         for(Plant plant : plants) {
             if(plant.getClass().equals(SunFlower.class)) {
@@ -597,6 +675,28 @@ public class GameState {
             return 5;
         else
             return 0;
+    }
+    private void randomZombieCreator(int condition) {
+        switch (condition) {
+            case 2:
+                Random random = new Random();
+                int row = random.nextInt(4) + 2;
+                int kind = random.nextInt(2) + 1;
+                if(2 <= row && row <=4 && 1<=kind && kind<= 2){
+                    if(kind == 1) {
+                        zombies.add(new NormalZombie(row));
+                        zombieNumber++;
+                    }
+                    else if(kind == 2) {
+                        zombies.add(new BucketHeadZombie(row));
+                        zombieNumber++;
+                    }
+                }
+                break;
+            case 1:
+                zombies.add(new NormalZombie(3));
+                zombieNumber++;
+        }
     }
 
 }

@@ -61,7 +61,7 @@ public class GameState {
         for(int i = 0; i < 5; i++) {
             lawnMowers.add(new LawnMower(i+1));
         }
-		condition = 3;
+		condition = 4;
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
 	}
@@ -260,33 +260,35 @@ public class GameState {
 
                 if(wave == 1){
                     cnt2++;
-                    if(cnt2 % 100 == 0 && zombieNumber < 14)
+                    if(cnt2 % 100 == 0 && zombieNumber < 17)
                         randomZombieCreator(condition);
                 }
-                if(zombieNumber == 14 && zombies.size() == 0) {
+                if(zombieNumber == 17 && zombies.size() == 0) {
                     wave = 2;
                     System.out.println("wave 2");
                 }
 
                 if(wave ==2) {
                     cnt2++;
-                    if(cnt2 % 100 == 0 && zombieNumber < 18)
+                    if(cnt2 % 100 == 0 && zombieNumber < 20)
                         randomZombieCreator(2);
                 }
-                if(zombieNumber == 18 && zombies.size() == 0)
+                if(zombieNumber == 20 && zombies.size() == 0)
                     wave = 3;
                 if(wave == 3) {
                     cnt2++;
-                    if(cnt2 % 100 == 0 && zombieNumber < 23)
+                    if(cnt2 % 100 == 0 && zombieNumber < 22)
                         randomZombieCreator(condition);
                 }
-                if(zombieNumber == 23 && zombies.size() == 0) {
+                if(zombieNumber == 22 && zombies.size() == 0) {
                     infoReset();
                     condition = 4;
                 }
                 break;
+
             case 4:
-                backGround = new ImageIcon("/Images/backGround5.jpg");
+
+                backGround = new ImageIcon("Images/backGround5.jpg");
 
                 menuBar = new GamePanel();
 
@@ -300,7 +302,7 @@ public class GameState {
                  * checking which kind of zombie to create.
                  */
                 double b4 = Math.random();
-                if(b4 > 0.996 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber < 15) {
+                if(b4 > 0.997 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber < 15) {
                     Random random = new Random();
                     int row = random.nextInt(5) + 1;
                     int kind = random.nextInt(3) + 1;
@@ -332,13 +334,56 @@ public class GameState {
                 bulletShooting();
 
                 sunFlowerProduction();
+                /**
+                 * activating cherryBombs!
+                 */
+                for(int i = 0; i < plants.size(); i++) {
+                    if(plants.get(i).getClass().equals(CherryBomb.class) && System.currentTimeMillis() - plants.get(i).time_created > 2000) {
+                        for(int j = 0; j < zombies.size(); j++) {
+                            if(zombies.get(j).row == plants.get(i).row && (plants.get(i).x - zombies.get(j).x <= 83 || zombies.get(j).x + zombies.get(j).imageIcon.getIconWidth() - plants.get(i).x <= 83 )) {
+                                zombies.remove(j);
+                                j--;
+                            }
+                        }
+                        plants.remove(i);
+                        i--;
+                    }
+                }
+                /**
+                 * WaVe!!! :D
+                 */
+                if(zombieNumber == 15 && zombies.size() == 0) {
+                    wave = 1;
+                    System.out.println("wave 1");
+                }
 
+                if(wave == 1){
+                    cnt2++;
+                    if(cnt2 % 100 == 0 && zombieNumber < 20)
+                        randomZombieCreator(condition);
+                }
+                if(zombieNumber == 19 && zombies.size() == 0) {
+                    wave = 2;
+                    System.out.println("wave 2");
+                }
 
-
-
-
-
-
+                if(wave ==2) {
+                    cnt2++;
+                    if(cnt2 % 100 == 0 && zombieNumber < 24)
+                        randomZombieCreator(2);
+                }
+                if(zombieNumber == 24 && zombies.size() == 0)
+                    wave = 3;
+                if(wave == 3) {
+                    cnt2++;
+                    if(cnt2 % 100 == 0 && zombieNumber < 27)
+                        randomZombieCreator(condition);
+                }
+                if(zombieNumber == 27 && zombies.size() == 0) {
+                    infoReset();
+                    condition = 5;
+                }
+            break;
         }
 	}
 	public KeyListener getKeyListener() {
@@ -410,7 +455,7 @@ public class GameState {
             switch (condition)  {
                 case 4:
                     if(323 <= e.getX() && e.getX() <=376 && 29 <= e.getY() && e.getY() <=102 && score>=175 && System.currentTimeMillis() - last_cherryBomb > 15000) {
-                        draggedImage = new ImageIcon("/Images/cherryBombIcon.png");
+                        draggedImage = new ImageIcon("Images/cherryBomb.png");
                         tmpX = e.getX() - draggedImage.getIconWidth()/2;
                         tmpY = e.getY() - draggedImage.getIconHeight();
                         last_cherryBomb = System.currentTimeMillis();
@@ -453,7 +498,7 @@ public class GameState {
             ImageIcon sunFlower = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
             ImageIcon walnut = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/walnut.png");
             ImageIcon snowPeaShooter = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/snowPeaShooter.png");
-            ImageIcon cherryBomb = new ImageIcon("/Images/cherryBombIcon.png");
+            ImageIcon cherryBomb = new ImageIcon("Images/cherryBomb.png");
             switch (condition) {
                 case 4:
                     if(draggedImage != null) {
@@ -465,22 +510,22 @@ public class GameState {
                     else
                         draggedImage = null;
                     if(draggedImage != null) {
-                        if(draggedImage.getImage() == peaShooter.getImage() && freeSpace(column, row) && 2 <= row && row <= 4) {
+                        if(draggedImage.getImage() == peaShooter.getImage() && freeSpace(column, row) && 1 <= row && row <= 5) {
                             plants.add(new PeaShooter(column, row));
                             draggedImage = null;
                             score = score - 100;
                         }
-                        else if(draggedImage.getImage() == sunFlower.getImage() && freeSpace(column, row) && 2 <= row && row <= 4) {
+                        else if(draggedImage.getImage() == sunFlower.getImage() && freeSpace(column, row) && 1 <= row && row <= 5) {
                             plants.add(new SunFlower(column, row));
                             draggedImage = null;
                             score = score - 50;
                         }
-                        else if(draggedImage.getImage() == walnut.getImage() && freeSpace(column, row) && 2 <= row && row <= 4) {
+                        else if(draggedImage.getImage() == walnut.getImage() && freeSpace(column, row) && 1 <= row && row <= 5) {
                             plants.add(new Walnut(column, row));
                             draggedImage = null;
                             score = score - 50;
                         }
-                        else if(draggedImage.getImage() == snowPeaShooter.getImage() && freeSpace(column, row) && 2 <= row && row <= 4) {
+                        else if(draggedImage.getImage() == snowPeaShooter.getImage() && freeSpace(column, row) && 1 <= row && row <= 5) {
                             plants.add(new SnowPeaShooter(column, row));
                             draggedImage = null;
                             score = score - 175;
@@ -712,8 +757,10 @@ public class GameState {
                         if(plants.get(j).bullets.get(k).x >= zombies.get(i).x - 7 && plants.get(j).bullets.get(k).x <= zombies.get(i).x && plants.get(j).row == zombies.get(i).row) {
                             plants.get(j).bullets.remove(k);
                             k--;
-                            if(plants.get(j).getClass().equals(SnowPeaShooter.class))
+                            if(plants.get(j).getClass().equals(SnowPeaShooter.class)) {
                                 zombies.get(i).health = zombies.get(i).health - 2;
+                                zombies.get(i).speed = zombies.get(i).speed + 2;
+                            }
                             else
                                 zombies.get(i).health--;
                             if(zombies.get(i).health < 1) {
@@ -795,8 +842,10 @@ public class GameState {
                     for(int k = 0; k < zombies.size(); k++) {
                         if(zombies.get(k).row == plants.get(i).row) {
                             if(zombies.get(k).x - 7 <= plants.get(i).bullets.get(j).x && plants.get(i).bullets.get(j).x <= zombies.get(k).x) {
-                                if(plants.get(i).getClass().equals(SnowPeaShooter.class))
+                                if(plants.get(i).getClass().equals(SnowPeaShooter.class)) {
                                     zombies.get(k).health = zombies.get(k).health - 2;
+                                    zombies.get(k).speed = zombies.get(k).speed + 2;
+                                }
                                 else
                                     zombies.get(k).health--;
                                 if(zombies.get(k).health < 1) {

@@ -8,11 +8,11 @@ public class BucketHeadZombie extends Zombie {
         row = a;
         imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/bucketHeadZombie.png");
         health = 8;
-        speed = 4;
+        speed = 6;
         switch (a) {
             case 2:
                 x = 800;
-                y = 250 - imageIcon.getIconHeight();
+                y = 266 - imageIcon.getIconHeight();
                 break;
             case 3:
                 x = 800;
@@ -21,6 +21,14 @@ public class BucketHeadZombie extends Zombie {
             case 4:
                 x = 800;
                 y = 462 - imageIcon.getIconHeight();
+                break;
+            case 5:
+                x = 800;
+                y = 571 - imageIcon.getIconHeight();
+                break;
+            case 1:
+                x = 800;
+                y = 184 - imageIcon.getIconHeight();
                 break;
 
         }

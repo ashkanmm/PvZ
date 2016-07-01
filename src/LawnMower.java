@@ -16,7 +16,7 @@ public class LawnMower {
         switch (a) {
             case 1:
                 x = -50;
-                y = 144 - imageIcon.getIconHeight();
+                y = 178 - imageIcon.getIconHeight();
                 row = 1;
                 break;
             case 2:

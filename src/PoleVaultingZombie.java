@@ -13,7 +13,7 @@ public class PoleVaultingZombie extends Zombie {
         switch (a) {
             case 2:
                 x = 800;
-                y = 250 - imageIcon.getIconHeight();
+                y = 266 - imageIcon.getIconHeight();
                 break;
             case 3:
                 x = 800;
@@ -22,6 +22,14 @@ public class PoleVaultingZombie extends Zombie {
             case 4:
                 x = 800;
                 y = 462 - imageIcon.getIconHeight();
+                break;
+            case 5:
+                x = 800;
+                y = 571 - imageIcon.getIconHeight();
+                break;
+            case 1:
+                x = 800;
+                y = 184 - imageIcon.getIconHeight();
                 break;
 
         }

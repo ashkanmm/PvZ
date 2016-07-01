@@ -14,6 +14,7 @@ public abstract class Plant {
     public long last_sun;
     protected ArrayList<Bullet> bullets;
     public int health;
+    public long time_created;
     public Plant() {
 
     }

@@ -5,7 +5,8 @@ import javax.swing.*;
  */
 public class CherryBomb extends Plant {
     public CherryBomb(int a, int b) {
-        imageIcon = new ImageIcon("/Images/cherryBomb.png");
+        health = 100;
+        imageIcon = new ImageIcon("Images/cherryBomb.png");
         column = a;
         row = b;
         if(a == 1)
@@ -36,5 +37,6 @@ public class CherryBomb extends Plant {
             y = 428 - imageIcon.getIconHeight();
         else if(b== 5)
             y = 523 - imageIcon.getIconHeight();
+        time_created = System.currentTimeMillis();
     }
 }

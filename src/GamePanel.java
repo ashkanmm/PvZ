@@ -16,7 +16,7 @@ public class GamePanel {
         sunflowerIcon = new ImageIcon("/Users/ashkanmehrkar/IntelliJ/jPvZ/src/Images/sunflowerIcon.png");
         walnutIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/walnutIcon.png");
         snowPeaShooterIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/snowPeaShooterIcon.png");
-        cherryBombIcon = new ImageIcon("/Images/cherryBombIcon.png");
+        cherryBombIcon = new ImageIcon("Images/cherryBombIcon.png");
     }
 
 }

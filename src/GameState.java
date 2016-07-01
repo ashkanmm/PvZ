@@ -53,7 +53,7 @@ public class GameState {
         draggedImage = null;
         tmpY = 0;
         tmpX = 0;
-		score = 400;
+		score = 100;
 		suns = new ArrayList<Sun>();
 		plants = new ArrayList<Plant>();
 		zombies = new ArrayList<Zombie>();
@@ -61,7 +61,7 @@ public class GameState {
         for(int i = 0; i < 5; i++) {
             lawnMowers.add(new LawnMower(i+1));
         }
-		condition = 4;
+		condition = 5;
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
 	}
@@ -149,6 +149,7 @@ public class GameState {
                     Random random = new Random();
                     int row = random.nextInt(4) + 2;
                     int kind = random.nextInt(2) + 1;
+                    System.out.println("row:   " + row + "   kind:   " + kind);
                     if(2 <= row && row <=4 && 1<=kind && kind<= 2){
                         if(kind ==1) {
                             zombies.add(new NormalZombie(row));
@@ -215,7 +216,7 @@ public class GameState {
                  * checking which kind of zombie to create.
                  */
                 double b3 = Math.random();
-                if(b3 > 0.997 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber < 13) {
+                if(b3 > 0.997 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber < 20) {
                     Random random = new Random();
                     int row = random.nextInt(4) + 2;
                     int kind = random.nextInt(3) + 1;
@@ -250,37 +251,34 @@ public class GameState {
                 /**
                  * WaVe!!! :D
                  */
-                /**
-                 * WaVe!!!! :D
-                 */
-                if(zombieNumber == 13 && zombies.size() == 0) {
+                if(zombieNumber == 20 && zombies.size() == 0) {
                     wave = 1;
                     System.out.println("wave 1");
                 }
 
                 if(wave == 1){
                     cnt2++;
-                    if(cnt2 % 100 == 0 && zombieNumber < 17)
+                    if(cnt2 % 100 == 0 && zombieNumber < 25)
                         randomZombieCreator(condition);
                 }
-                if(zombieNumber == 17 && zombies.size() == 0) {
+                if(zombieNumber == 25 && zombies.size() == 0) {
                     wave = 2;
                     System.out.println("wave 2");
                 }
 
                 if(wave ==2) {
                     cnt2++;
-                    if(cnt2 % 100 == 0 && zombieNumber < 20)
+                    if(cnt2 % 100 == 0 && zombieNumber < 30)
                         randomZombieCreator(2);
                 }
-                if(zombieNumber == 20 && zombies.size() == 0)
+                if(zombieNumber == 30 && zombies.size() == 0)
                     wave = 3;
                 if(wave == 3) {
                     cnt2++;
-                    if(cnt2 % 100 == 0 && zombieNumber < 22)
+                    if(cnt2 % 100 == 0 && zombieNumber < 34)
                         randomZombieCreator(condition);
                 }
-                if(zombieNumber == 22 && zombies.size() == 0) {
+                if(zombieNumber == 34 && zombies.size() == 0) {
                     infoReset();
                     condition = 4;
                 }
@@ -384,6 +382,112 @@ public class GameState {
                     condition = 5;
                 }
             break;
+
+            case 5:
+                backGround = new ImageIcon("Images/backGround5.jpg");
+
+                menuBar = new GamePanel();
+
+                sunCreating();
+
+                sunMovement();
+
+                /**
+                 * randomly creating zombies.
+                 * checking zombies limitation.
+                 * checking which kind of zombie to create.
+                 */
+                double b5 = Math.random();
+                if(b5 > 0.997 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber < 30) {
+                    Random random = new Random();
+                    int row = random.nextInt(5) + 1;
+                    int kind = random.nextInt(3) + 1;
+                    System.out.println("row:  " + row + "  kind:  "  +kind);
+                    if(1 <= row && row <=5 && 1<=kind && kind<= 3){
+                        if(kind ==1) {
+                            zombies.add(new NormalZombie(row));
+                            last_Zombie = System.currentTimeMillis();
+                            zombieNumber++;
+                        }
+                        else if(kind == 2) {
+                            zombies.add(new BucketHeadZombie(row));
+                            last_Zombie = System.currentTimeMillis();
+                            zombieNumber++;
+                        }
+                        else if(kind == 3) {
+                            zombies.add(new PoleVaultingZombie(row));
+                            last_Zombie = System.currentTimeMillis();
+                            zombieNumber++;
+                        }
+                    }
+                }
+
+                zombieMovement();
+
+                lawnMoverCheck();
+
+                bulletMovement();
+
+                bulletShooting();
+
+                sunFlowerProduction();
+
+                /**
+                 * activating cherryBombs!
+                 */
+                for(int i = 0; i < plants.size(); i++) {
+                    if(plants.get(i).getClass().equals(CherryBomb.class) && System.currentTimeMillis() - plants.get(i).time_created > 2000) {
+                        for(int j = 0; j < zombies.size(); j++) {
+                            if(zombies.get(j).row == plants.get(i).row && (plants.get(i).x - zombies.get(j).x <= 83 || zombies.get(j).x + zombies.get(j).imageIcon.getIconWidth() - plants.get(i).x <= 83 )) {
+                                zombies.remove(j);
+                                j--;
+                            }
+                        }
+                        plants.remove(i);
+                        i--;
+                    }
+                }
+
+                /**
+                 * WaVe!!! :D
+                 * 5 zombies for first and second wave.
+                 * 4 zombies for third and fourth wave.
+                 */
+                if(zombieNumber == 30 && zombies.size() == 0) {
+                    wave = 1;
+                    System.out.println("wave 1");
+                }
+
+                if(wave == 1) {
+                    cnt2++;
+                    if(cnt2 % 100 == 0 && zombieNumber < 35)
+                        randomZombieCreator(condition);
+                }
+                if(zombieNumber == 35 && zombies.size() == 0) {
+                    wave = 2;
+                    System.out.println("wave 2");
+                }
+
+                if(wave == 2) {
+                    cnt2++;
+                    if(cnt2 % 100 == 0 && zombieNumber < 40)
+                        randomZombieCreator(2);
+                }
+                if(zombieNumber == 40 && zombies.size() == 0)
+                    wave = 3;
+                if(wave == 3) {
+                    cnt2++;
+                    if(cnt2 % 100 == 0 && zombieNumber < 44)
+                        randomZombieCreator(condition);
+                }
+                if(zombieNumber == 44 && zombies.size() == 0)
+                    wave = 4;
+                if(wave == 4) {
+                    cnt2++;
+                    if(cnt2 % 100 == 0 && zombieNumber < 48)
+                        randomZombieCreator(4);
+                }
+                break;
         }
 	}
 	public KeyListener getKeyListener() {
@@ -430,6 +534,7 @@ public class GameState {
 					if(407 < e.getX() && e.getX() < 729 && 97 < e.getY() && e.getY() < 203)
 						condition = 1;
 					break;
+                case 5:
                 case 4:
                 case 3:
                 case 2:
@@ -453,6 +558,7 @@ public class GameState {
 		@Override
 		public void mousePressed(MouseEvent e) {
             switch (condition)  {
+                case 5:
                 case 4:
                     if(323 <= e.getX() && e.getX() <=376 && 29 <= e.getY() && e.getY() <=102 && score>=175 && System.currentTimeMillis() - last_cherryBomb > 15000) {
                         draggedImage = new ImageIcon("Images/cherryBomb.png");
@@ -500,6 +606,7 @@ public class GameState {
             ImageIcon snowPeaShooter = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/snowPeaShooter.png");
             ImageIcon cherryBomb = new ImageIcon("Images/cherryBomb.png");
             switch (condition) {
+                case 5:
                 case 4:
                     if(draggedImage != null) {
                         row = rowIdentifier(e);
@@ -641,6 +748,7 @@ public class GameState {
 		@Override
 		public void mouseDragged(MouseEvent e) {
             switch (condition)  {
+                case 5:
                 case 4:
                 case 3:
                 case 2:
@@ -710,6 +818,18 @@ public class GameState {
         cnt1 = 0;
         cnt2 = 0;
         wave = 0;
+        for(int i = 0; i < suns.size(); i++) {
+            suns.remove(i);
+            i--;
+        }
+        for(int i = 0; i < zombies.size(); i++) {
+            zombies.remove(i);
+            i--;
+        }
+        for(int i = 0; i < plants.size(); i++) {
+            plants.remove(i);
+            i--;
+        }
     }
     /**
      * updating zombies' position.
@@ -816,7 +936,7 @@ public class GameState {
                     continue;
                 }
                 for(int j = 0; j < zombies.size(); j++) {
-                    if(zombies.get(j).row == lawnMowers.get(i).row && lawnMowers.get(i).x >= zombies.get(j).x - 5 && lawnMowers.get(i).x <= zombies.get(j).x) {
+                    if(zombies.get(j).row == lawnMowers.get(i).row && zombies.get(j).x - lawnMowers.get(i).x <=5) {
                         zombies.remove(j);
                         j--;
                     }
@@ -891,7 +1011,7 @@ public class GameState {
     private void sunFlowerProduction() {
         for(Plant plant : plants) {
             if(plant.getClass().equals(SunFlower.class)) {
-                if(System.currentTimeMillis() - plant.last_sun > 25000) {
+                if(System.currentTimeMillis() - plant.last_sun > 15000) {
                     suns.add(new Sun(plant.x, plant.y));
                     plant.last_sun = System.currentTimeMillis();
                 }
@@ -938,6 +1058,25 @@ public class GameState {
         Random random = new Random();
         int row, kind;
         switch (condition) {
+            case 5:
+            case 4:
+                row = random.nextInt(5) + 1;
+                kind = random.nextInt(3) + 1;
+                if(1 <= row && row <= 5 && 1 <= kind && kind <= 3){
+                    if(kind == 1) {
+                        zombies.add(new NormalZombie(row));
+                        zombieNumber++;
+                    }
+                    else if(kind == 2) {
+                        zombies.add(new BucketHeadZombie(row));
+                        zombieNumber++;
+                    }
+                    else if(kind == 3){
+                        zombies.add(new PoleVaultingZombie(row));
+                        zombieNumber++;
+                    }
+                }
+                break;
             case 3:
                 row = random.nextInt(4) + 2;
                 kind = random.nextInt(2) + 1;

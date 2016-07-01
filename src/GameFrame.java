@@ -90,6 +90,7 @@ public class GameFrame extends JFrame {
 			case 0:
 				g2d.drawImage(state.backGround.getImage(), 0, 0, null);
 				break;
+			case 5:
 			case 4:
 				g2d.drawImage(state.backGround.getImage(), 0, 0, null);
 				for(Plant plant : state.plants) {

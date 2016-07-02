@@ -1,10 +1,17 @@
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 import javax.swing.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Created by ashkanmehrkar on 7/1/16.
  */
 public class CherryBomb extends Plant {
     public CherryBomb(int a, int b) {
+        playSound("CherryBombExplode");
         health = 100;
         imageIcon = new ImageIcon("Images/cherryBomb.png");
         column = a;
@@ -38,5 +45,18 @@ public class CherryBomb extends Plant {
         else if(b== 5)
             y = 523 - imageIcon.getIconHeight();
         time_created = System.currentTimeMillis();
+    }
+    protected void playSound(String fName) {
+        FileInputStream in;
+        try {
+            in = new FileInputStream("Sound/" + fName + ".wav");
+            AudioStream audioStream;
+            audioStream = new AudioStream(in);
+            AudioPlayer.player.start(audioStream);
+        } catch (FileNotFoundException e) {
+            System.out.println("Sound Not Found!");
+        } catch (IOException e) {
+            System.out.println("Play Sound Exception");
+        }
     }
 }

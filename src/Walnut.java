@@ -5,7 +5,7 @@ import javax.swing.*;
  */
 public class Walnut extends Plant {
     public Walnut(int a, int b) {
-        imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/walnut.png");
+        imageIcon = new ImageIcon("Images/walnut.png");
         column = a;
         row = b;
         health = 30;
@@ -37,5 +37,18 @@ public class Walnut extends Plant {
             y = 428 - imageIcon.getIconHeight();
         else if(b== 5)
             y = 523 - imageIcon.getIconHeight();
+    }
+    public void checkImage(int health) {
+        if(health > 20){
+
+        }
+        else if(health > 10){
+            imageIcon = new ImageIcon("Images/gerdoo1.png");
+        }
+        else{
+            imageIcon = new ImageIcon("Images/gerdoo2.png");
+        }
+
+
     }
 }

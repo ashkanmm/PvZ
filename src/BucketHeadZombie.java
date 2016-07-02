@@ -6,7 +6,7 @@ import javax.swing.*;
 public class BucketHeadZombie extends Zombie {
     public BucketHeadZombie(int a) {
         row = a;
-        imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/bucketHeadZombie.png");
+        imageIcon = new ImageIcon("Images/bucketHeadZombie.png");
         health = 8;
         speed = 6;
         switch (a) {

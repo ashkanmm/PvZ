@@ -6,7 +6,7 @@ import javax.swing.*;
 public class SunFlower extends Plant {
     public SunFlower(int a, int b) {
         last_sun = System.currentTimeMillis();
-        imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sunFlower.png");
+        imageIcon = new ImageIcon("Images/sunFlower.png");
         row = b;
         column = a;
         health = 5;

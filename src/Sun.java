@@ -11,14 +11,14 @@ public class Sun {
     public int y;
     boolean existence;
     public Sun() {
-        sunIcon= new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sun.png");
+        sunIcon= new ImageIcon("Images/sun.png");
         existence = true;
         Random random = new Random();
         x = random.nextInt(800 - sunIcon.getIconWidth()) + 0;
         y = 0;
     }
     public Sun(int a, int b) {
-        sunIcon= new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/sun.png");
+        sunIcon= new ImageIcon("Images/sun.png");
         existence = true;
         x = a + 10;
         y = b + 10;

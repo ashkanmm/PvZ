@@ -12,7 +12,7 @@ public class LawnMower {
     public boolean turnOn;
     public LawnMower(int a) {
         turnOn = false;
-        imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/chamanZan.png");
+        imageIcon = new ImageIcon("Images/chamanZan.png");
         switch (a) {
             case 1:
                 x = -50;

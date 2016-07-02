@@ -1,16 +1,18 @@
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
- * Created by ashkanmehrkar on 7/1/16.
+ * Created by leilaaz on 7/1/16.
  */
-public class PoleVaultingZombie extends Zombie {
-    public PoleVaultingZombie(int a) {
-        jumping = true;
-        row =a;
-        health = 3;
-        speed = 2;
-        imageIcon = new ImageIcon("Images/poleVaultingZombie.png");
-        switch (a) {
+public class CatapultZombie extends Zombie {
+    public CatapultZombie(int a){
+        bullets = new ArrayList<CatapultZombieBullet>();
+        imageIcon = new ImageIcon("Images/catapultZombie.png");
+        health = 15;
+        speed = 4;
+        row = a;
+        bulletNumber = 0;
+        switch (a){
             case 2:
                 x = 800;
                 y = 266 - imageIcon.getIconHeight();
@@ -31,7 +33,6 @@ public class PoleVaultingZombie extends Zombie {
                 x = 800;
                 y = 184 - imageIcon.getIconHeight();
                 break;
-
         }
     }
 }

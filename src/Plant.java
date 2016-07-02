@@ -18,4 +18,7 @@ public abstract class Plant {
     public Plant() {
 
     }
+    public void checkImage(int health) {
+
+    }
 }

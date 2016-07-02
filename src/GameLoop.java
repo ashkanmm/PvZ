@@ -1,4 +1,10 @@
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 import javax.swing.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * A very simple structure for the main game loop.
@@ -50,8 +56,11 @@ public class GameLoop implements Runnable {
 				state.update(canvas);
 				canvas.render(state);
 				//
-				if(state.gameOver())
+				if(state.gameOver()) {
 					gameOver = true;
+					playSound("GameOver1");
+				}
+
 				long delay = (1000 / FPS) - (System.currentTimeMillis() - start);
 				if (delay > 0)
 					Thread.sleep(delay);
@@ -59,5 +68,18 @@ public class GameLoop implements Runnable {
 			}
 		}
 		canvas.getGraphics().drawImage(new ImageIcon("Images/gameOver.png").getImage(), 0, 0, null);
+	}
+	protected void playSound(String fName) {
+		FileInputStream in;
+		try {
+			in = new FileInputStream("Sound/" + fName + ".wav");
+			AudioStream audioStream;
+			audioStream = new AudioStream(in);
+			AudioPlayer.player.start(audioStream);
+		} catch (FileNotFoundException e) {
+			System.out.println("Sound Not Found!");
+		} catch (IOException e) {
+			System.out.println("Play Sound Exception");
+		}
 	}
 }

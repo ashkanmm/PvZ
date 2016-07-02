@@ -5,7 +5,7 @@ import javax.swing.*;
  */
 public class SnowPeaShooterBullet extends Bullet {
     public SnowPeaShooterBullet(int a, int b) {
-        imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/snowPeaShooterBullet.png");
+        imageIcon = new ImageIcon("Images/snowPeaShooterBullet.png");
         x = a + 45;
         y = b + 15;
     }

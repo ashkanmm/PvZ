@@ -5,7 +5,7 @@ import javax.swing.*;
  */
 public class NormalZombie extends Zombie {
     public NormalZombie(int a) {
-        imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/normalZombie.png");
+        imageIcon = new ImageIcon("Images/normalZombie.png");
         row = a;
         health = 5;
         speed = 4;

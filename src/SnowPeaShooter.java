@@ -1,4 +1,10 @@
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 import javax.swing.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -6,7 +12,8 @@ import java.util.ArrayList;
  */
 public class SnowPeaShooter extends Plant {
     public SnowPeaShooter(int a, int b) {
-        imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/snowPeaShooter.png");
+        playSound("SnowPeaShoot");
+        imageIcon = new ImageIcon("Images/snowPeaShooter.png");
         column = a;
         row = b;
         last_bullet = 0;
@@ -40,5 +47,18 @@ public class SnowPeaShooter extends Plant {
         else if(b== 5)
             y = 523 - imageIcon.getIconHeight();
         bullets = new ArrayList<Bullet>();
+    }
+    protected void playSound(String fName) {
+        FileInputStream in;
+        try {
+            in = new FileInputStream("Sound/" + fName + ".wav");
+            AudioStream audioStream;
+            audioStream = new AudioStream(in);
+            AudioPlayer.player.start(audioStream);
+        } catch (FileNotFoundException e) {
+            System.out.println("Sound Not Found!");
+        } catch (IOException e) {
+            System.out.println("Play Sound Exception");
+        }
     }
 }

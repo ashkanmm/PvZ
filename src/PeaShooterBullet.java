@@ -5,7 +5,7 @@ import javax.swing.*;
  */
 public class PeaShooterBullet extends Bullet {
     public PeaShooterBullet(int a, int b) {
-        imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/peaShooterBullet.png");
+        imageIcon = new ImageIcon("Images/peaShooterBullet.png");
         x = a + 45;
         y = b + 15;
     }

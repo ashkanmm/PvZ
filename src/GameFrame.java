@@ -119,6 +119,13 @@ public class GameFrame extends JFrame {
 				for(int i = 0; i < state.zombies.size(); i++)
 					g2d.drawImage(state.zombies.get(i).imageIcon.getImage(), state.zombies.get(i).x, state.zombies.get(i).y, null);
 				g2d.drawString(String.valueOf(state.score), 40, 100);
+				for(int i = 0; i < state.zombies.size(); i++) {
+					if(state.zombies.get(i).getClass().equals(CatapultZombie.class)) {
+						for(int j = 0; j < state.zombies.get(i).bullets.size(); j++) {
+							g2d.drawImage(state.zombies.get(i).bullets.get(j).imageIcon.getImage(), state.zombies.get(i).bullets.get(j).x, state.zombies.get(i).bullets.get(j).y, null);
+						}
+					}
+				}
 				break;
 			case 3:
 				g2d.drawImage(state.backGround.getImage(), 0, 0, null);

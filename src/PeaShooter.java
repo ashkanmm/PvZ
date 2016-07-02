@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class PeaShooter extends Plant {
     public PeaShooter(int a, int b) {
-        imageIcon = new ImageIcon("/Users/ashkanmehrkar/IntelliJ/jPvZ/src/Images/peaShooter.png");
+        imageIcon = new ImageIcon("/Users/ashkanmehrkar/Desktop/PvZ/src/Images/peaShooter.png");
         column = a;
         row = b;
         last_bullet = 0;

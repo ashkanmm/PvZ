@@ -44,8 +44,8 @@ public class GameState {
     private long last_cherryBomb = 0;
     private int cnt1 = 0;
     private int cnt2 = 0;
+    private int cnt3 = 0;
     private int wave = 0;
-	
 	public GameState() {
 		//
 		// Initialize the game state and all elements ...
@@ -57,6 +57,7 @@ public class GameState {
 		suns = new ArrayList<Sun>();
 		plants = new ArrayList<Plant>();
 		zombies = new ArrayList<Zombie>();
+        zombies.add(new CatapultZombie(3));
 		lawnMowers = new ArrayList<LawnMower>();
         for(int i = 0; i < 5; i++) {
             lawnMowers.add(new LawnMower(i+1));
@@ -401,9 +402,9 @@ public class GameState {
                 if(b5 > 0.997 - ((System.currentTimeMillis() - last_Zombie) / 1000) * 0.00005 && zombieNumber < 30) {
                     Random random = new Random();
                     int row = random.nextInt(5) + 1;
-                    int kind = random.nextInt(3) + 1;
+                    int kind = random.nextInt(4) + 1;
                     System.out.println("row:  " + row + "  kind:  "  +kind);
-                    if(1 <= row && row <=5 && 1<=kind && kind<= 3){
+                    if(1 <= row && row <= 5 && 1 <= kind && kind <= 4){
                         if(kind ==1) {
                             zombies.add(new NormalZombie(row));
                             last_Zombie = System.currentTimeMillis();
@@ -419,14 +420,46 @@ public class GameState {
                             last_Zombie = System.currentTimeMillis();
                             zombieNumber++;
                         }
+                        else if(kind == 4) {
+                            zombies.add(new CatapultZombie(row));
+                            last_Zombie = System.currentTimeMillis();
+                            zombieNumber++;
+                        }
                     }
                 }
 
                 zombieMovement();
 
+                catapultZombieMovement();
+
                 lawnMoverCheck();
 
                 bulletMovement();
+
+                for(int i = 0; i < zombies.size(); i++) {
+                    if(zombies.get(i).getClass().equals(CatapultZombie.class)) {
+                        for(int j = 0; j < zombies.get(i).bullets.size(); j++) {
+                            if(zombies.get(i).bullets.get(j).x < 0) {
+                                zombies.get(i).bullets.remove(j);
+                                j--;
+                                continue;
+                            }
+                            else
+                                zombies.get(i).bullets.get(j).x = zombies.get(i).bullets.get(j).x - 7;
+                            for(int k = 0; k < plants.size(); k++) {
+                                if(plants.get(k).row == zombies.get(i).row && zombies.get(i).bullets.get(j).x - plants.get(k).x <= 7 && plants.get(k).x == findPlant(zombies.get(i).row)) {
+                                    plants.get(k).health--;
+                                    if(plants.get(k).health < 1) {
+                                        plants.remove(k);
+                                        k--;
+                                    }
+                                    zombies.get(i).bullets.remove(j);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
 
                 bulletShooting();
 
@@ -840,7 +873,7 @@ public class GameState {
         cnt++;
         zombieLoop:
         for(int i = 0; i < zombies.size(); i++) {
-            if(zombies.get(i).x + zombies.get(i).imageIcon.getIconWidth() > 0 && cnt % zombies.get(i).speed == 0 && availableMoving(zombies.get(i))) {
+            if(zombies.get(i).x + zombies.get(i).imageIcon.getIconWidth() > 0 && cnt % zombies.get(i).speed == 0 && availableMoving(zombies.get(i)) && zombies.get(i).getClass() != CatapultZombie.class) {
                 zombies.get(i).x = zombies.get(i).x - 2;
                 if(zombies.get(i).x <= 53) {
                     for(int z = 0; z < lawnMowers.size(); z++) {
@@ -850,7 +883,7 @@ public class GameState {
                     }
                 }
             }
-            else if(!availableMoving(zombies.get(i))) {
+            else if(!availableMoving(zombies.get(i)) && zombies.get(i).getClass() != CatapultZombie.class) {
                 if(zombies.get(i).getClass().equals(PoleVaultingZombie.class) && zombies.get(i).jumping) {
                     zombies.get(i).x = zombies.get(i).x - 82 - zombies.get(i).imageIcon.getIconWidth();
                     zombies.get(i).jumping = false;
@@ -892,7 +925,6 @@ public class GameState {
                     }
                 }
             }
-
         }
     }
     /**
@@ -1114,6 +1146,61 @@ public class GameState {
                 zombieNumber++;
                 break;
         }
+    }
+
+    private void catapultZombieMovement() {
+        cnt3++;
+        for(int i = 0; i < zombies.size(); i++) {
+            if(zombies.get(i).getClass().equals(CatapultZombie.class)) {
+                if(zombies.get(i).x > 589 && cnt3 % zombies.get(i).speed == 0)
+                    zombies.get(i).x = zombies.get(i).x - 2;
+                for(int j = 0; j < plants.size(); j++) {
+                    if(plants.get(j).row == zombies.get(i).row && plants.get(j).x >= zombies.get(i).x - 2 && plants.get(j).x <= zombies.get(i).x + zombies.get(i).imageIcon.getIconWidth() + 2){
+                        plants.remove(j);
+                        j--;
+                    }
+                }
+                if(zombies.get(i).x == 588) {
+                    if(zombies.get(i).bulletNumber < 10 && findPlant(zombies.get(i).row) != 800 && cnt3 % 20 == 0) {
+                        zombies.get(i).bullets.add(new CatapultZombieBullet(zombies.get(i).x + zombies.get(i).imageIcon.getIconWidth() - 37, zombies.get(i).y + 45));
+                        zombies.get(i).bulletNumber++;
+                    }
+                    else if(zombies.get(i).bulletNumber >= 10 || findPlant(zombies.get(i).row) == 800)
+                        zombies.get(i).x = zombies.get(i).x - 2;
+                }
+                if(zombies.get(i).x < 588 && cnt3 % zombies.get(i).speed == 0) {
+                    zombies.get(i).x = zombies.get(i).x - 2;
+                    for(int j = 0; j < plants.size(); j++) {
+                        if(zombies.get(i).x - plants.get(j).x <= 2) {
+                            plants.remove(j);
+                            j--;
+                        }
+                    }
+                }
+                if(zombies.get(i).x <= 53)
+                    for(int k = 0; k < lawnMowers.size(); k++) {
+                        if(lawnMowers.get(k).row == zombies.get(i).row)
+                            lawnMowers.get(k).turnOn = true;
+                    }
+            }
+        }
+    }
+    private int findPlant(int row) {
+        int x = 800;
+        for(int i = 0; i < plants.size(); i++) {
+            if(plants.get(i).row == row) {
+                if(plants.get(i).x <= x )
+                    x = plants.get(i).x;
+            }
+        }
+        return x;
+    }
+    public boolean gameOver() {
+        for(int i = 0 ; i < zombies.size(); i++) {
+            if(zombies.get(i).x < 5)
+                return true;
+        }
+        return false;
     }
 
 }

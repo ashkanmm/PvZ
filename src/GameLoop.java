@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 /**
  * A very simple structure for the main game loop.
  * THIS IS NOT PERFECT, but works for most situations.
@@ -48,11 +50,14 @@ public class GameLoop implements Runnable {
 				state.update(canvas);
 				canvas.render(state);
 				//
+				if(state.gameOver())
+					gameOver = true;
 				long delay = (1000 / FPS) - (System.currentTimeMillis() - start);
 				if (delay > 0)
 					Thread.sleep(delay);
 			} catch (InterruptedException ex) {
 			}
 		}
+		canvas.getGraphics().drawImage(new ImageIcon("Images/gameOver.png").getImage(), 0, 0, null);
 	}
 }

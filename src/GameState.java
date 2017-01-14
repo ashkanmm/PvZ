@@ -66,7 +66,7 @@ public class GameState {
         for(int i = 0; i < 5; i++) {
             lawnMowers.add(new LawnMower(i+1));
         }
-        condition = -3;
+        condition = 5;
         keyHandler = new KeyHandler();
         mouseHandler = new MouseHandler();
     }
